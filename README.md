@@ -10,5 +10,7 @@ implment crisp theme using wagtail framework
 ![series](_screenshot/series.png)
 ![author](_screenshot/author.png)
 
+<div style='display:flex;'>
 <img src="_screenshot/mobile_post.png" alt="" width="205">
 <img src="_screenshot/mobile_author.png" alt="" width="200">
+ </div>

@@ -3,7 +3,7 @@
 
 {% block content %}
 <h1>Latest posts</h1>
-{% for post in page.lates_posts %}
+{% for post in result.object_list %}
 <section id="{{comment_id}}" class="{{post_class}}">
 	<h3 class="post-title">
 		
@@ -16,5 +16,5 @@
 	</h3>
 </section>
 {% endfor %}
-
+{% include '_partail/pagination.html' with result=result %}
 {% endblock content %}

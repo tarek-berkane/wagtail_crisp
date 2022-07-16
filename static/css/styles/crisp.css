@@ -309,11 +309,11 @@ header #follow-icons{
 	display: none;
 }
 
-nav {
+#nav-menu {
 	display: none;
 }
 
-nav.show{
+#nav-menu.show{
 	display: block;
 }
 
@@ -343,7 +343,7 @@ header #mobile-header #menu-btn{
 }
 
 h1{
-	margin: 5px 0;
+	margin: 20px 0;
 	font-size: 2rem;
 }
 

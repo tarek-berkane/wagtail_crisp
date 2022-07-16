@@ -1,9 +1,11 @@
 from django.db import models
+from django.core.paginator import Paginator
 
 from wagtail.models import Page
 from wagtail.core.fields import RichTextField
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.admin.panels import MultiFieldPanel, FieldPanel
+from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
 from apps.post.models import Post
 
@@ -18,12 +20,26 @@ RICH_TEXT_FEATURES = [
 ]
 
 
-class Home(Page):
+class Home(RoutablePageMixin, Page):
     max_count = 1
 
-    def lates_posts(self):
-        posts = Post.objects.all().live()
-        return posts
+    @route(r"^$")
+    def current_events(self, request):
+        post = Post.objects.all().live()
+        paginator = Paginator(post, 8)
+
+        page_number = request.GET.get("p")
+        if page_number:
+            result = paginator.get_page(page_number)
+        else:
+            result = paginator.get_page(1)
+
+        return self.render(
+            request,
+            context_overrides={
+                "result": result,
+            },
+        )
 
 
 class Author(Page):

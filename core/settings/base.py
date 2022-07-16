@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "wagtail.contrib.simple_translation",
     "wagtail.contrib.settings",
     "wagtail.contrib.table_block",
+    "wagtail.contrib.routable_page",
     "wagtail",
     "modelcluster",
     "taggit",

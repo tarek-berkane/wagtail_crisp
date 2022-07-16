@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+<section class="author">
+    {% if page.auth_image %}
+    {% image page.auth_image width-400 as auth_image %}
+    <img class="author-profile-image" src="{{auth_image.url}}" alt="{{auth_image.alt}}">
+    {% endif %}
+
+    <div class="author-content">
+        <h2 class="author-name">
+            {{page.full_name}}
+        </h2>
+        <div class="bio-wrapper">
+            {{page.content|richtext}}
+        </div>
+    </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,18 @@
+<div id="follow-icons">
+	<span style="margin: 0 5px;font-size: 18px;color:white">Follow</span>
+	{% if settings.home.SocialMediaSettings.linkedin %}
+		<a href="{{settings.home.SocialMediaSettings.linkedin}}" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin-square fa-2x"></i></a>
+	{% endif %}
+
+	{% if settings.home.SocialMediaSettings.twitter %}
+		<a href="{{settings.home.SocialMediaSettings.twitter}}" target="_blank" rel="noopener noreferrer"><i class="fa  fa-twitter-square fa-2x"></i></a>
+		{% endif %}
+		
+		{% if settings.home.SocialMediaSettings.youtube %}
+		<a href="{{settings.home.SocialMediaSettings.youtube}}" target="_blank" rel="noopener noreferrer"><i class="fa fa-youtube-square fa-2x"></i></a>
+		{% endif %}
+		
+		{% if settings.home.SocialMediaSettings.github %}
+		<a href="{{settings.home.SocialMediaSettings.github}}" target="_blank" rel="noopener noreferrer"><i class="fa fa-github-square fa-2x"></i></a>
+	{% endif %}
+</div>

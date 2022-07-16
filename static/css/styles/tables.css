@@ -1,0 +1,15 @@
+article table {
+    border-collapse: collapse;
+    margin-bottom: 1.5em 0.7em;
+    text-align: left;
+}
+
+article table th {
+    padding: 5px 10px;
+    border-bottom: 1px solid black;
+}
+
+article table td {
+    padding: 5px 10px;
+    border-bottom: 1px solid #ddd;
+}

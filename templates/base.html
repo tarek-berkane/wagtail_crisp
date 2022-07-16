@@ -1,0 +1,85 @@
+{% load static wagtailcore_tags wagtailimages_tags wagtailuserbar %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        
+        <title>
+            {% block title %}
+            {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
+            {% endblock %}
+            {% block title_suffix %}
+            {% wagtail_site as current_site %}
+            {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
+            {% endblock %}
+        </title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {# Global stylesheets #}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/core.css' %}">
+
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,700italic,300,700' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles/crisp.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles/tables.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles/guilatrova.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles/author.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles/coding.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles/summary.css' %}">
+
+        {% block extra_css %}
+        {# Override this in templates to add extra stylesheets #}
+        {% endblock %}
+
+        <meta name="HandheldFriendly" content="True" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+
+    <body class="{% block body_class %}{% endblock %}">
+        {% wagtailuserbar %}
+
+        <header id="header" {% if site.cover_image %}style="background-image: url('{{site.cover_image}}')"{% endif %}>
+
+
+            {% if settings.home.WebsiteInfoSettings.logo %}
+                <a id="big-logo" href="{% slugurl 'home' %}">
+                    {% image settings.home.WebsiteInfoSettings.logo width-314 %}
+                </a>
+                
+            {% else %}           
+                <h1><a href="{% slugurl 'home' %}">{{settings.home.WebsiteInfoSettings.title}}</a></h1>
+            {% endif %}
+           
+			<p id='main-description'>{{settings.home.WebsiteInfoSettings.description}}</p>
+            <div id="mobile-header" >
+                <a  href="{% slugurl 'home' %}">
+                    <img src="{% static 'img/text_logo.png' %}" alt="" srcset="">
+                </a> 
+                
+                <span id="menu-btn" onclick="toggle_menu()">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </span>
+            </div>
+            {% include '_partail/follow.html' %}
+            {% include '_partail/navigation.html' %}
+		</header>
+
+        <main id="content">
+            {% block content %}{% endblock %}
+		</main>
+
+        {# Global javascript #}
+        <script type="text/javascript" src="{% static 'js/core.js' %}"></script>
+
+        {% block extra_js %}
+   
+        {% endblock %}
+
+
+    </body>
+</html>

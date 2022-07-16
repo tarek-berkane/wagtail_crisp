@@ -1,0 +1,30 @@
+.subscribe-form-wrapper form {
+    display: flex;
+}
+
+.subscribe-form-wrapper form input {
+    border: 1px solid #e9ecef;
+    border-radius: .25rem;
+    color: #495057;
+
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    box-sizing: border-box;
+    margin: 0 10px;
+    padding: .375rem .75rem;
+}
+
+.subscribe-form-wrapper form button {
+    border: 1px solid transparent;
+    border-radius: .25rem;
+
+    background-color: #15b532;
+    color: #fff;
+    cursor: pointer;
+
+    padding: .375rem .75rem;
+    line-height: 1.5;
+    font-size: 1em;
+    font-weight: bold;
+
+}

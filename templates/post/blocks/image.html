@@ -1,0 +1,8 @@
+{% load wagtailimages_tags %}
+{% image self.image max-1000x500 as image %}
+<figure class="kg-card kg-image-card kg-card-hascaption" style="text-align: center;margin: 15px 0;">
+    <img src="{{image.url}}" alt="{{image.alt}}">
+    {% if self.caption %}
+        <figcaption>{{self.caption}}</figcaption>
+    {% endif %}
+</figure>

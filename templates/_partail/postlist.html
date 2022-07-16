@@ -1,0 +1,15 @@
+{% load wagtailcore_tags humanize %}
+
+{% for post in page.get_children %}
+<section id="{{comment_id}}" class="{{post_class}}">
+	<h3 class="post-title">
+		
+		<a href="{% pageurl post %}" class="post-link">
+			{{post.title}}
+		</a>
+		
+		<span class="separator"> &middot; </span>{{post.last_published_at|date}}
+		{% comment %} <span class="taglist">{{tags separator=" " prefix=" &middot; "}}</span> {% endcomment %}
+	</h3>
+</section>
+{% endfor %}

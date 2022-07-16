@@ -1,0 +1,8 @@
+
+{% if self.head_type == 'h2' %}
+<h2>{{self.title}}</h2>
+{% elif self.head_type == 'h3' %}
+<h3>{{self.title}}</h3>
+{% else %}
+<h4>{{self.title}}</h4>
+{% endif %}

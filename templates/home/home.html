@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags humanize %}
+
+{% block content %}
+<h1>Latest posts</h1>
+{% for post in page.lates_posts %}
+<section id="{{comment_id}}" class="{{post_class}}">
+	<h3 class="post-title">
+		
+		<a href="{% pageurl post %}" class="post-link">
+			{{post.title}}
+		</a>
+		
+		<span class="separator"> &middot; </span>{{post.last_published_at|date}}
+		{% comment %} <span class="taglist">{{tags separator=" " prefix=" &middot; "}}</span> {% endcomment %}
+	</h3>
+</section>
+{% endfor %}
+
+{% endblock content %}

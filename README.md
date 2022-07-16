@@ -7,8 +7,8 @@ implment crisp theme using wagtail framework
 ## Screenshot
 
 ![author](_screenshot/author.png)
-![post](_screenshot/post.png)
 ![series](_screenshot/series.png)
+![post](_screenshot/post.png)
 
 <div style='display:flex;'>
 <img src="_screenshot/mobile_post.png" alt="" width="205">

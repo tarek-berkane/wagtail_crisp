@@ -80,13 +80,21 @@ class SocialMediaSettings(BaseSetting):
 
 @register_setting
 class WebsiteInfoSettings(BaseSetting):
-    logo = models.ForeignKey(
+    side_logo = models.ForeignKey(
         "wagtailimages.Image",
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name="+",
-        null=True,
         blank=True,
+        null=True,
     )
 
-    title = models.CharField(max_length=25, default="Website")
-    description = models.CharField(max_length=255, default="Change this text")
+    text_logo = models.ForeignKey(
+        "wagtailimages.Image",
+        on_delete=models.SET_NULL,
+        related_name="+",
+        blank=True,
+        null=True,
+    )
+
+    website_name = models.CharField(max_length=25, default="Website")
+    website_description = models.CharField(max_length=255, default="Change this text")

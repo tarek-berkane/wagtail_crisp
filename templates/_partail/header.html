@@ -1,0 +1,32 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+<header id="header" {% if site.cover_image %}style="background-image: url('{{site.cover_image}}')" {% endif %}>
+
+
+    <a id="big-logo" href="{% slugurl 'home' %}">
+        {% if settings.home.WebsiteInfoSettings.side_logo %}
+            {% image settings.home.WebsiteInfoSettings.side_logo width-314 %}
+        {% else %}
+            <img src="{% static 'img/default/side_logo.png' %}" alt="logo" width="314">
+        {% endif %}
+    </a>
+
+
+
+    <p id='main-description'>{{settings.home.WebsiteInfoSettings.description}}</p>
+    <div id="mobile-header">
+        <a href="{% slugurl 'home' %}">
+            {% if settings.home.WebsiteInfoSettings.text_logo %}
+                {% image settings.home.WebsiteInfoSettings.text_logo height-30 %}
+            {% else %}
+                <img src="{% static 'img/default/text_logo.png' %}" alt="" srcset="">
+            {% endif %}
+        </a>
+
+        <span id="menu-btn" onclick="toggle_menu()">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </span>
+    </div>
+    {% include '_partail/follow.html' %}
+    {% include '_partail/navigation.html' %}
+</header>

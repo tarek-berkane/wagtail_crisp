@@ -15,7 +15,13 @@
             {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
             {% endblock %}
         </title>
-        <meta name="description" content="" />
+
+        <meta name="description"
+        content="{% block meta_description %}
+                      {{ page.search_description }}
+        {% endblock meta_description %}"/>
+
+
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {# Global stylesheets #}
@@ -43,31 +49,8 @@
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
 
-        <header id="header" {% if site.cover_image %}style="background-image: url('{{site.cover_image}}')"{% endif %}>
-
-
-            {% if settings.home.WebsiteInfoSettings.logo %}
-                <a id="big-logo" href="{% slugurl 'home' %}">
-                    {% image settings.home.WebsiteInfoSettings.logo width-314 %}
-                </a>
-                
-            {% else %}           
-                <h1><a href="{% slugurl 'home' %}">{{settings.home.WebsiteInfoSettings.title}}</a></h1>
-            {% endif %}
-           
-			<p id='main-description'>{{settings.home.WebsiteInfoSettings.description}}</p>
-            <div id="mobile-header" >
-                <a  href="{% slugurl 'home' %}">
-                    <img src="{% static 'img/text_logo.png' %}" alt="" srcset="">
-                </a> 
-                
-                <span id="menu-btn" onclick="toggle_menu()">
-                    <i class="fa fa-bars" aria-hidden="true"></i>
-                </span>
-            </div>
-            {% include '_partail/follow.html' %}
-            {% include '_partail/navigation.html' %}
-		</header>
+        
+       {% include '_partail/header.html' %}
 
         <main id="content">
             {% block content %}{% endblock %}

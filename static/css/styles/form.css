@@ -1,0 +1,28 @@
+
+
+label{
+    display: block;
+}
+
+input{
+    width: 100%;
+    padding: auto 10px;
+}
+
+input[type=submit]{
+    background-color: transparent;
+    border: solid 2px #46aef3;
+    border-radius: 5px;
+    cursor: pointer;
+    color: rgb(44, 43, 43);
+}
+
+textarea{
+    padding:  5px;
+    width: 100%;
+}
+
+.form-area{
+    max-width: 600px;
+    margin: auto;
+}

@@ -10,6 +10,7 @@ html, body {
 	font-weight: 300;
     background: #fff;
 	color: #444;
+	overflow-x: hidden;
 }
 html {
 	height: 100%;

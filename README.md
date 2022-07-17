@@ -2,6 +2,7 @@
 implment crisp theme using wagtail framework 
 ## Credit 
 [guilatrova crisp](https://github.com/guilatrova/crisp)
+
 [crisp theme](https://github.com/kathyqian/crisp)
 
 ## Screenshot

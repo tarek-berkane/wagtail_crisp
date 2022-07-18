@@ -13,6 +13,7 @@ urlpatterns = [
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
+    path("subscribe", include("apps.subscribe.urls")),
 ]
 
 
@@ -22,7 +23,7 @@ if settings.DEBUG:
 
     # Serve static and media files from development server
     urlpatterns += [
-            path("__reload__/", include("django_browser_reload.urls")),
+        path("__reload__/", include("django_browser_reload.urls")),
     ]
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

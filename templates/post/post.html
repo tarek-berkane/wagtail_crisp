@@ -15,7 +15,7 @@
     <h1 class="post-title">{{page.title}}</h1>
 	<div class="post-stamp">
         <span class="commit-signature">
-            <a href="#">admin</a>
+            <a href="#">{{page.owner.username}}</a>
             
 			commited <span style="color: rgb(61, 59, 59);">{{page.last_published_at|naturalday}}</span>
 		</span>
@@ -28,8 +28,8 @@
 	{{page.content}}
 	{% include '_partail/subscribe-popup.html' %}
 	{% include '_partail/share.html' %}
-	{% include '_partail/subscribe.html' %}
-
+	{% include 'subscribe/_partail/subscribe.html' %}
+	{% include '_partail/disqus.html' %}
 	{% comment %} {{> subscribe-popup}}
 	{{> share}}
     {{> subscribe}} {% endcomment %}

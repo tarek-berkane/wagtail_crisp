@@ -1,3 +1,4 @@
+from xml.etree.ElementInclude import include
 from django.db import models
 from django.core.paginator import Paginator
 
@@ -98,6 +99,7 @@ class WebsiteInfoSettings(BaseSetting):
 
     website_name = models.CharField(max_length=25, default="Website")
     website_description = models.CharField(max_length=255, default="Change this text")
+    disqus_url = models.URLField(null=True, blank=True)
 
 
 # FORMS

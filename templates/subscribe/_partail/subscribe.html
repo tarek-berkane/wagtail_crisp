@@ -1,0 +1,16 @@
+<div class="subscribe-form-wrapper">
+    <h2 class="subscribe-heading">
+      🚀 Don't miss the next posts! 📥
+    </h2>
+  
+    <form action="{% url 'subscribe-view' %}" method="post" name="revue-form"  target="_blank"/>
+        {% comment %} <input class="revue-form-field" placeholder="Email" type="email" name="member[email]"/> {% endcomment %}
+        {% csrf_token %}
+        {{form}}
+  
+      <button type="submit" name="member[subscribe]">
+        Subscribe
+      </button>
+    </form>
+  </div>
+  

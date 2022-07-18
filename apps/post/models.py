@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.paginator import Paginator
 
-from wagtail.admin.panels import StreamFieldPanel, FieldPanel
+from wagtail.admin.panels import StreamFieldPanel, FieldPanel, MultiFieldPanel
 from wagtail.core.models import Page
 from wagtail.core.fields import StreamField, RichTextField
 from wagtail.core.blocks import RichTextBlock
@@ -9,6 +9,7 @@ from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
 from apps.post.blocks import HeaderBlock, ImageBlock, QuoteBlock, CodeBlock
+from apps.subscribe.forms import SubscribeForm
 
 RICH_TEXT_FEATURES = [
     "bold",
@@ -77,6 +78,8 @@ class PostCategory(RoutablePageMixin, Page):
 class Post(Page):
     parent_page_types = ["post.PostCategory"]
 
+    include_comments = models.BooleanField(default=True)
+
     content = StreamField(
         [
             ("head", HeaderBlock()),
@@ -88,4 +91,20 @@ class Post(Page):
         ]
     )
 
-    content_panels = Page.content_panels + [FieldPanel("content")]
+    content_panels = Page.content_panels + [
+        FieldPanel("content"),
+    ]
+
+    settings_panels = Page.settings_panels + [
+        MultiFieldPanel(
+            [
+                FieldPanel("include_comments"),
+            ],
+            heading="comments",
+        )
+    ]
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context["form"] = SubscribeForm()
+        return context

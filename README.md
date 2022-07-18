@@ -10,6 +10,7 @@ implment crisp theme using wagtail framework
 ![author](_screenshot/author.png)
 ![series](_screenshot/series.png)
 ![post](_screenshot/post.png)
+![post](_screenshot/post_comment.png)
 ![post](_screenshot/form.png)
 
 <div style='display:flex;'>

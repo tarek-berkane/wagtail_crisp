@@ -8,6 +8,10 @@ from wagtail.core.blocks import RichTextBlock
 from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
+from modelcluster.fields import ParentalKey
+from modelcluster.contrib.taggit import ClusterTaggableManager
+from taggit.models import TaggedItemBase
+
 from apps.post.blocks import HeaderBlock, ImageBlock, QuoteBlock, CodeBlock
 from apps.subscribe.forms import SubscribeForm
 
@@ -20,6 +24,12 @@ RICH_TEXT_FEATURES = [
     "link",
     "document-link",
 ]
+
+
+class PostPageTag(TaggedItemBase):
+    content_object = ParentalKey(
+        "Post", related_name="tagged_items", on_delete=models.CASCADE
+    )
 
 
 class CategoryIndex(RoutablePageMixin, Page):
@@ -77,6 +87,7 @@ class PostCategory(RoutablePageMixin, Page):
 
 class Post(Page):
     parent_page_types = ["post.PostCategory"]
+    tags = ClusterTaggableManager(through=PostPageTag, blank=True)
 
     include_comments = models.BooleanField(default=True)
 
@@ -92,6 +103,7 @@ class Post(Page):
     )
 
     content_panels = Page.content_panels + [
+        FieldPanel("tags"),
         FieldPanel("content"),
     ]
 

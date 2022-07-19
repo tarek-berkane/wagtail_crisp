@@ -26,7 +26,14 @@ class Home(RoutablePageMixin, Page):
 
     @route(r"^$")
     def current_events(self, request):
+        context = {}
         post = Post.objects.all().live()
+
+        tag = request.GET.get("tag")
+        if tag:
+            post = post.filter(tags__name=tag)
+            context["tag_url"] = f"tag={tag}&"
+
         paginator = Paginator(post, 8)
 
         page_number = request.GET.get("p")
@@ -35,12 +42,9 @@ class Home(RoutablePageMixin, Page):
         else:
             result = paginator.get_page(1)
 
-        return self.render(
-            request,
-            context_overrides={
-                "result": result,
-            },
-        )
+        context["result"] = result
+
+        return self.render(request, context_overrides=context)
 
 
 class Author(Page):

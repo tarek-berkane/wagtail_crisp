@@ -9,7 +9,11 @@
 		</a>
 		
 		<span class="separator"> &middot; </span>{{post.last_published_at|date}}
-		{% comment %} <span class="taglist">{{tags separator=" " prefix=" &middot; "}}</span> {% endcomment %}
+		<span class="taglist">
+			{% for tag in post.specific.tags.all %}
+			<a href="{% slugurl 'home' %}?tag={{tag}}">{{tag}}</a>
+			{% endfor %}
+		</span>
 	</h3>
 </section>
 {% endfor %}

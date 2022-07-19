@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static humanize %}
+{% load static humanize wagtailcore_tags %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
@@ -16,23 +16,18 @@
 	<div class="post-stamp">
         <span class="commit-signature">
             <a href="#">{{page.owner.username}}</a>
-            
 			commited <span style="color: rgb(61, 59, 59);">{{page.last_published_at|naturalday}}</span>
 		</span>
-        
-		{% comment %} <span class="taglist">{{tags separator=" " prefix=" &middot; "}}</span>
-		{{#if featured}}
-        <span class="separator"> &middot; </span><i class="fa fa-star-o feature-star"></i>
-		{{/if}} {% endcomment %}
+		<span class="taglist">
+			{% for tag in page.specific.tags.all %}
+			<a href="{% slugurl 'home' %}?tag={{tag}}">{{tag}}</a>
+			{% endfor %}
+		</span>
 	</div>
 	{{page.content}}
-	{% comment %} {% include '_partail/subscribe-popup.html' %} {% endcomment %}
 	{% include '_partail/share.html' %}
 	{% include 'subscribe/_partail/subscribe.html' %}
 	{% include '_partail/disqus.html' %}
-	{% comment %} {{> subscribe-popup}}
-	{{> share}}
-    {{> subscribe}} {% endcomment %}
 </article>
 {% endblock content %}
 

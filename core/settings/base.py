@@ -25,8 +25,6 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
     "search",
-    "wagtail.contrib.forms",
-    "wagtail.contrib.redirects",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
@@ -39,6 +37,9 @@ INSTALLED_APPS = [
     "wagtail.contrib.settings",
     "wagtail.contrib.table_block",
     "wagtail.contrib.routable_page",
+    "django.contrib.sitemaps",
+    "wagtail.contrib.forms",
+    "wagtail.contrib.redirects",
     "wagtail",
     "modelcluster",
     "taggit",

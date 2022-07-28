@@ -52,10 +52,13 @@ class Home(RoutablePageMixin, Page):
 
         if post_type == "post":
             parent_type = PostCategory.objects.first()
-            post = post.child_of(parent_type)
+            if parent_type:
+                post = post.child_of(parent_type)
+
         elif post_type == "project":
             parent_type = ProjectIndex.objects.first()
-            post = post.child_of(parent_type)
+            if parent_type:
+                post = post.child_of(parent_type)
 
         if tag:
             post = post.filter(tags__name=tag)

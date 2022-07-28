@@ -28,6 +28,20 @@ RECAPTCHA_PUBLIC_KEY = env("RECAPTCHA_PUBLIC_KEY")
 RECAPTCHA_PRIVATE_KEY = env("RECAPTCHA_PRIVATE_KEY")
 
 
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "WARNING",
+    },
+}
+
 try:
     from .local import *
 except ImportError:

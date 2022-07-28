@@ -50,11 +50,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    # LIBRARIES
     "wagtailcaptcha",
     "captcha",
+    # MY APP
     "apps.home",
     "apps.post",
     "apps.subscribe",
+    "apps.project",
 ]
 
 WAGTAILSIMPLETRANSLATION_SYNC_PAGE_TREE = True

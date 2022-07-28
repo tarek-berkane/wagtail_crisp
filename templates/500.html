@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8" />
-        <title>Internal server error</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-    </head>
-    <body>
-        <h1>Internal server error</h1>
+{% extends "base.html" %}
 
-        <h2>Sorry, there seems to be an error. Please try again soon.</h2>
-    </body>
-</html>
+{% block title %}Page not found{% endblock %}
+
+{% block body_class %}template-404{% endblock %}
+
+{% block content %}
+<h1>Web server error</h1>
+
+<h2>This error is from the server thenks.</h2>
+{% endblock %}

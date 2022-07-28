@@ -9,6 +9,9 @@ from wagtail.contrib.sitemaps.views import sitemap
 
 from search import views as search_views
 
+# handler404 = "core.views.page_not_found"
+# handler500 = "core.views.server_error"
+
 urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),

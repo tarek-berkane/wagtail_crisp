@@ -1,12 +1,14 @@
 from xml.etree.ElementInclude import include
 from django.db import models
 from django.core.paginator import Paginator
+from django.http import HttpResponse
 
 from wagtail.models import Page
 from wagtail.core.fields import RichTextField
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.admin.panels import MultiFieldPanel, FieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+
 
 from apps.post.models import Post
 
@@ -120,6 +122,8 @@ class FormField(AbstractFormField):
 
 
 class FormPage(WagtailCaptchaEmailForm):
+    max_count = 1
+
     intro = RichTextField(blank=True)
     thank_you_text = RichTextField(blank=True)
 

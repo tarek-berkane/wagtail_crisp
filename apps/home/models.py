@@ -32,10 +32,23 @@ class Home(RoutablePageMixin, Page):
     def current_events(self, request):
         context = {}
 
-        post = Post.objects.all().live()
-
         post_type = request.GET.get("post-type")
         post_type = post_type or "all"
+        tag = request.GET.get("tag")
+        page_number = request.GET.get("p")
+
+        queryset = self.get_queryset(post_type, tag)
+        result = self.get_reuslt_pagination(queryset, page_number)
+
+        context["result"] = result
+        context["post_type"] = post_type
+        context["url_parameter"] = self.build_url_parameter(post_type, tag)
+
+        return self.render(request, context_overrides=context)
+
+    def get_queryset(self, post_type, tag):
+
+        post = Post.objects.all().live()
 
         if post_type == "post":
             parent_type = PostCategory.objects.first()
@@ -44,24 +57,20 @@ class Home(RoutablePageMixin, Page):
             parent_type = ProjectIndex.objects.first()
             post = post.child_of(parent_type)
 
-        tag = request.GET.get("tag")
         if tag:
             post = post.filter(tags__name=tag)
-            context["tag_url"] = f"tag={tag}&"
 
-        paginator = Paginator(post, 1)
+        return post
 
-        page_number = request.GET.get("p")
+    def get_reuslt_pagination(self, queryset, page_number):
+        paginator = Paginator(queryset, 8)
+
         if page_number:
             result = paginator.get_page(page_number)
         else:
             result = paginator.get_page(1)
 
-        context["result"] = result
-        context["post_type"] = post_type
-        context["url_parameter"] = self.build_url_parameter(post_type, tag)
-
-        return self.render(request, context_overrides=context)
+        return result
 
     def build_url_parameter(self, post_type, tag):
         parameter = ""
@@ -104,6 +113,7 @@ class SocialMediaSettings(BaseSetting):
     twitter = models.URLField(blank=True, null=True)
     linkedin = models.URLField(blank=True, null=True)
     github = models.URLField(blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
 
 
 # Create your models here.

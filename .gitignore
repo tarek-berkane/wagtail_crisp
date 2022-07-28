@@ -1,7 +1,6 @@
 db.sqlite3
 media-assets/
 my_env/
-**/migrations/0**.py
 **/__pycache__/
 .env
 

@@ -2,67 +2,85 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-	    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        
-        <title>
-            {% block title %}
-            {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
-            {% endblock %}
-            {% block title_suffix %}
-            {% wagtail_site as current_site %}
-            {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
-            {% endblock %}
-        </title>
 
-        <meta name="description"
-        content="{% block meta_description %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>
+        {% block title %}
+        {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
+        {% endblock %}
+        {% block title_suffix %}
+        {% wagtail_site as current_site %}
+        {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
+        {% endblock %}
+    </title>
+
+    <meta name="description" content="{% block meta_description %}
                       {{ page.search_description }}
-        {% endblock meta_description %}"/>
+        {% endblock meta_description %}" />
 
 
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="{% static 'img/favicon.svg' %}">
-        {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/core.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="{% static 'img/favicon.svg' %}">
+    {# Global stylesheets #}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core.css' %}">
 
-        <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,700italic,300,700' rel='stylesheet' type='text/css'>
-        <link href='//fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,700italic,300,700' rel='stylesheet'
+        type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-        <link rel="stylesheet" type="text/css" href="{% static 'css/styles/crisp.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/styles/tables.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/styles/guilatrova.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/styles/author.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/styles/coding.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/styles/summary.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles/crisp.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles/tables.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles/guilatrova.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles/author.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles/coding.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles/summary.css' %}">
 
-        {% block extra_css %}
-        {# Override this in templates to add extra stylesheets #}
-        {% endblock %}
+    {% block extra_css %}
+    {# Override this in templates to add extra stylesheets #}
+    {% endblock %}
 
-        <meta name="HandheldFriendly" content="True" />
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    </head>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
 
-    <body class="{% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
-
-        
-       {% include '_partail/header.html' %}
-
-        <main id="content">
-            {% block content %}{% endblock %}
-		</main>
-
-        {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/core.js' %}"></script>
-
-        {% block extra_js %}
-   
-        {% endblock %}
+<body class="{% block body_class %}{% endblock %}">
+    {% wagtailuserbar %}
 
 
-    </body>
+    {% include '_partail/header.html' %}
+
+    <main id="content">
+        {% block content %}{% endblock %}
+    </main>
+
+    {# Global javascript #}
+    <script type="text/javascript" src="{% static 'js/core.js' %}"></script>
+
+    {% block extra_js %}
+
+    {% endblock %}
+
+    {% if settings.home.GoogleAnalyticsSettings.is_enabled %}
+    {% with settings.home.GoogleAnalyticsSettings.account_id as account_id %}
+    {% if account_id %}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{account_id}}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', '{{account_id}}');
+    </script>
+    {% else %}
+    <!-- YOU DID FORGET TO SETUP ACCOUNT-ID FOR GOOGLE ANALYTICS -->
+    {% endif %}
+    {% endwith %}
+    {% endif %}
+</body>
+
 </html>

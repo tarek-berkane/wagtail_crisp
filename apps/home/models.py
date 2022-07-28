@@ -142,6 +142,12 @@ class WebsiteInfoSettings(BaseSetting):
     disqus_url = models.URLField(null=True, blank=True)
 
 
+@register_setting
+class GoogleAnalyticsSettings(BaseSetting):
+    is_enabled = models.BooleanField(default=False)
+    account_id = models.CharField(max_length=50, blank=True, null=True)
+
+
 # FORMS
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel

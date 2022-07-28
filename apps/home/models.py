@@ -10,7 +10,9 @@ from wagtail.admin.panels import MultiFieldPanel, FieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
 
-from apps.post.models import Post
+from apps.post.models import Post, PostCategory
+from apps.project.models import ProjectIndex
+
 
 RICH_TEXT_FEATURES = [
     "bold",
@@ -29,14 +31,25 @@ class Home(RoutablePageMixin, Page):
     @route(r"^$")
     def current_events(self, request):
         context = {}
+
         post = Post.objects.all().live()
+
+        post_type = request.GET.get("post-type")
+        post_type = post_type or "all"
+
+        if post_type == "post":
+            parent_type = PostCategory.objects.first()
+            post = post.child_of(parent_type)
+        elif post_type == "project":
+            parent_type = ProjectIndex.objects.first()
+            post = post.child_of(parent_type)
 
         tag = request.GET.get("tag")
         if tag:
             post = post.filter(tags__name=tag)
             context["tag_url"] = f"tag={tag}&"
 
-        paginator = Paginator(post, 8)
+        paginator = Paginator(post, 1)
 
         page_number = request.GET.get("p")
         if page_number:
@@ -45,8 +58,19 @@ class Home(RoutablePageMixin, Page):
             result = paginator.get_page(1)
 
         context["result"] = result
+        context["post_type"] = post_type
+        context["url_parameter"] = self.build_url_parameter(post_type, tag)
 
         return self.render(request, context_overrides=context)
+
+    def build_url_parameter(self, post_type, tag):
+        parameter = ""
+        if post_type:
+            parameter += f"post-type={post_type}&"
+        if tag:
+            parameter += f"tag={tag}&"
+
+        return parameter
 
 
 class Author(Page):

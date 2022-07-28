@@ -2,6 +2,26 @@
 {% load wagtailcore_tags humanize %}
 
 {% block content %}
-<h1>Latest posts</h1>
+<div class="" style="display: flex;align-items: center;justify-content: space-between;">
+    <h1>Latest posts</h1>
+    <div class="">
+        <form id="filter-form" action="" method="get">
+            <label for="">Show</label>
+            <select name="post-type" id="post-type-input" style="padding: 5px;margin-top: 10px;">
+                <option value="all" {% if post_type == 'all' %}selected{% endif %}>All</option>
+                <option value="post" {% if post_type == 'post' %}selected{% endif %}>Posts</option>
+                <option value="project" {% if post_type == 'project' %}selected{% endif %}>Projects</option>
+            </select>
+        </form>
+    </div>
+</div>
 {% include '_partail/postlist.html' %}
 {% endblock content %}
+
+{% block extra_js %}
+<script>
+    let form = document.getElementById("filter-form");
+    let post_type_input = document.getElementById('post-type-input');
+    post_type_input.addEventListener('change',()=>form.submit());
+</script>
+{% endblock extra_js %}

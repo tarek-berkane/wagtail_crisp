@@ -23,33 +23,40 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 # Application definition
 
+
 INSTALLED_APPS = [
-    "search",
-    "wagtail.embeds",
-    "wagtail.sites",
-    "wagtail.users",
-    "wagtail.snippets",
-    "wagtail.documents",
-    "wagtail.images",
-    "wagtail.search",
-    "wagtail.admin",
+    # 'home',
+    'search',
+
+    'wagtail.contrib.forms',
+    'wagtail.contrib.redirects',
+    'wagtail.embeds',
+    'wagtail.sites',
+    'wagtail.users',
+    'wagtail.snippets',
+    'wagtail.documents',
+    'wagtail.images',
+    'wagtail.search',
+    'wagtail.admin',
+    'wagtail.core',
+
+    'modelcluster',
+    'taggit',
+
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    # I ADD THOSE
     "wagtail.contrib.simple_translation",
     "wagtail.contrib.settings",
     "wagtail.contrib.table_block",
     "wagtail.contrib.routable_page",
     "django.contrib.sitemaps",
-    "wagtail.contrib.forms",
-    "wagtail.contrib.redirects",
-    "wagtail",
-    "modelcluster",
-    "taggit",
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
     "django.contrib.humanize",
+
     # LIBRARIES
     "wagtailcaptcha",
     "captcha",
@@ -59,6 +66,45 @@ INSTALLED_APPS = [
     "apps.subscribe",
     "apps.project",
 ]
+
+# INSTALLED_APPS = [
+#     "search",
+#     "wagtail.contrib.forms",
+#     "wagtail.contrib.redirects",
+#     "wagtail.embeds",
+#     "wagtail.sites",
+#     "wagtail.users",
+#     "wagtail.snippets",
+#     "wagtail.documents",
+#     "wagtail.images",
+#     "wagtail.search",
+#     "wagtail.admin",
+
+#     "wagtail.contrib.simple_translation",
+#     "wagtail.contrib.settings",
+#     "wagtail.contrib.table_block",
+#     "wagtail.contrib.routable_page",
+#     "django.contrib.sitemaps",
+    
+#     # "wagtail",
+#     "modelcluster",
+#     "taggit",
+#     "django.contrib.admin",
+#     "django.contrib.auth",
+#     "django.contrib.contenttypes",
+#     "django.contrib.sessions",
+#     "django.contrib.messages",
+#     "django.contrib.staticfiles",
+#     "django.contrib.humanize",
+#     # LIBRARIES
+#     "wagtailcaptcha",
+#     "captcha",
+#     # MY APP
+#     "apps.home",
+#     "apps.post",
+#     "apps.subscribe",
+#     "apps.project",
+# ]
 
 WAGTAILSIMPLETRANSLATION_SYNC_PAGE_TREE = True
 

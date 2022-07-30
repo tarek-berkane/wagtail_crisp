@@ -9,16 +9,16 @@ from wagtail.contrib.sitemaps.views import sitemap
 
 from search import views as search_views
 
-# handler404 = "core.views.page_not_found"
-# handler500 = "core.views.server_error"
+from core.views import robots
 
 urlpatterns = [
+    path("robots.txt/", robots),
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
     path("subscribe", include("apps.subscribe.urls")),
-    path("sitemap.xml", sitemap),
+    path("sitemap.xml", sitemap, name="sitemap"),
 ]
 
 

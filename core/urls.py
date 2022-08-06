@@ -13,8 +13,8 @@ from core.views import robots
 
 urlpatterns = [
     path("robots.txt/", robots),
-    path("django-admin/", admin.site.urls),
-    path("admin/", include(wagtailadmin_urls)),
+    # path("django-admin/", admin.site.urls),
+    path("cms_admin_panel/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
     path("subscribe", include("apps.subscribe.urls")),

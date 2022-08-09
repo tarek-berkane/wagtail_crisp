@@ -5,3 +5,4 @@ my_env/
 .env
 
 static-assets/
+ping_file.json

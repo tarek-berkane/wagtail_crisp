@@ -2,7 +2,6 @@ from datetime import datetime
 import json
 
 from django.conf import settings
-from wagtail.signals import page_published
 
 # Let everyone know when a new page is published
 def update_content_tracker(sender, **kwargs):

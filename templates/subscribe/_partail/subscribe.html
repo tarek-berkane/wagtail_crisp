@@ -26,13 +26,16 @@
     // function will get executed 
     // on click of submit button
     $("#submitButton").click(function (ev) {
+
       var form = $("#formId");
       var url = form.attr('action');
+
       $.ajax({
         type: "POST",
         url: '{% url 'subscribe-view' %}',
         data: form.serialize(),
         success: function (data) {
+          form.val('');
           console.log("Form Submited Successfully");
           //TODO
         },

@@ -56,8 +56,9 @@ INSTALLED_APPS = [
     # MY APP
     "apps.home",
     "apps.post",
-    "apps.subscribe",
     "apps.project",
+    "apps.subscribe",
+    "apps.config",
 ]
 
 WAGTAILSIMPLETRANSLATION_SYNC_PAGE_TREE = True

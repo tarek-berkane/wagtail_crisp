@@ -4,8 +4,8 @@
 
 
     <a id="big-logo" href="{% slugurl 'home' %}">
-        {% if settings.home.WebsiteInfoSettings.side_logo %}
-            {% image settings.home.WebsiteInfoSettings.side_logo width-314 %}
+        {% if settings.config.WebsiteInfoSettings.side_logo %}
+            {% image settings.config.WebsiteInfoSettings.side_logo width-314 %}
         {% else %}
             <img src="{% static 'img/default/side_logo.png' %}" alt="logo" width="314">
         {% endif %}
@@ -13,11 +13,11 @@
 
 
 
-    <p id='main-description'>{{settings.home.WebsiteInfoSettings.website_description}}</p>
+    <p id='main-description'>{{settings.config.WebsiteInfoSettings.website_description}}</p>
     <div id="mobile-header">
         <a href="{% slugurl 'home' %}">
-            {% if settings.home.WebsiteInfoSettings.text_logo %}
-                {% image settings.home.WebsiteInfoSettings.text_logo height-30 %}
+            {% if settings.config.WebsiteInfoSettings.text_logo %}
+                {% image settings.config.WebsiteInfoSettings.text_logo height-30 %}
             {% else %}
                 <img src="{% static 'img/default/text_logo.png' %}" alt="" srcset="">
             {% endif %}

@@ -86,7 +86,7 @@ class PostCategory(RoutablePageMixin, Page):
 
 
 class Post(Page):
-    parent_page_types = ["post.PostCategory",'project.ProjectIndex']
+    parent_page_types = ["post.PostCategory", "project.ProjectIndex"]
     tags = ClusterTaggableManager(through=PostPageTag, blank=True)
 
     include_comments = models.BooleanField(default=True)

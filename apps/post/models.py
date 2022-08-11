@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.paginator import Paginator
 
-from wagtail.admin.panels import StreamFieldPanel, FieldPanel, MultiFieldPanel
+from wagtail.admin.edit_handlers import StreamFieldPanel, FieldPanel, MultiFieldPanel
 from wagtail.core.models import Page
 from wagtail.core.fields import StreamField, RichTextField
 from wagtail.core.blocks import RichTextBlock
@@ -106,7 +106,7 @@ class Post(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel("tags"),
-        FieldPanel("content"),
+        StreamFieldPanel("content"),
     ]
 
     settings_panels = Page.settings_panels + [

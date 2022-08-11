@@ -3,10 +3,10 @@ from django.db import models
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 
-from wagtail.models import Page
+from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
 from wagtail.contrib.settings.models import BaseSetting, register_setting
-from wagtail.admin.panels import MultiFieldPanel, FieldPanel
+from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
 
@@ -153,10 +153,15 @@ class Author(Page):
 
 # FORMS
 from modelcluster.fields import ParentalKey
-from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel
-from wagtail.fields import RichTextField
+from wagtail.admin.edit_handlers import (
+    FieldPanel,
+    FieldRowPanel,
+    InlinePanel,
+    MultiFieldPanel,
+)
+from wagtail.core.fields import RichTextField
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
-from wagtail.contrib.forms.panels import FormSubmissionsPanel
+from wagtail.contrib.forms.edit_handlers import FormSubmissionsPanel
 from wagtailcaptcha.models import WagtailCaptchaEmailForm
 
 

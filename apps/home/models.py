@@ -7,6 +7,7 @@ from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel
+from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
 
@@ -102,7 +103,7 @@ class Author(Page):
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(
-            [FieldPanel("auth_image"), FieldPanel("full_name")], heading="Main info"
+            [ImageChooserPanel("auth_image"), FieldPanel("full_name")], heading="Main info"
         ),
         FieldPanel("content"),
     ]

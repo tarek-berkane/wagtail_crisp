@@ -64,8 +64,8 @@
 
     {% endblock %}
 
-    {% if settings.home.GoogleAnalyticsSettings.is_enabled %}
-    {% with settings.home.GoogleAnalyticsSettings.account_id as account_id %}
+    {% if settings.config.GoogleAnalyticsSettings.is_enabled %}
+    {% with settings.config.GoogleAnalyticsSettings.account_id as account_id %}
     {% if account_id %}
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{account_id}}"></script>

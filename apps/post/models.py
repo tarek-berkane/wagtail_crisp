@@ -13,7 +13,9 @@ from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
 from apps.post.blocks import HeaderBlock, ImageBlock, QuoteBlock, CodeBlock
+from apps.subscribe.constants import ALREADY_SUBSCRIBE
 from apps.subscribe.forms import SubscribeForm
+from apps.subscribe.services import already_subscribed
 
 RICH_TEXT_FEATURES = [
     "bold",
@@ -119,4 +121,5 @@ class Post(Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context["form"] = SubscribeForm()
+        context[ALREADY_SUBSCRIBE] = already_subscribed(request)
         return context

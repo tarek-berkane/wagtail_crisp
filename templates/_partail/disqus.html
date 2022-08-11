@@ -1,4 +1,4 @@
-{% if settings.home.WebsiteInfoSettings.disqus_url %}
+{% if settings.config.WebsiteInfoSettings.disqus_url %}
     {% if page.include_comments %}
         <div id="disqus_thread" style='margin-top:20px;'></div>
         <script>
@@ -10,7 +10,7 @@
             
             (function() { // DON'T EDIT BELOW THIS LINE
             var d = document, s = d.createElement('script');
-            s.src = '{{settings.home.WebsiteInfoSettings.disqus_url}}';
+            s.src = '{{settings.config.WebsiteInfoSettings.disqus_url}}';
             s.setAttribute('data-timestamp', +new Date());
             (d.head || d.body).appendChild(s);
         })();

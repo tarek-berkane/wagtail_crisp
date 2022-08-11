@@ -63,8 +63,9 @@ INSTALLED_APPS = [
     # MY APP
     "apps.home",
     "apps.post",
-    "apps.subscribe",
     "apps.project",
+    "apps.subscribe",
+    "apps.config",
 ]
 
 # INSTALLED_APPS = [

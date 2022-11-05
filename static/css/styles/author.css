@@ -1,0 +1,21 @@
+.author-profile-image {
+    border-radius: 150px;
+    margin-right: 30px;
+    height: 227px;
+}
+
+.author-content {
+    font-size: 19px;
+    line-height: 30px;
+    text-align: justify;
+    padding-right: 20px;
+}
+
+.author-content h2 {
+    margin-bottom: 0px;
+}
+
+.bio-wrapper {
+    padding-left: 15px;
+    max-width: 56em;
+}

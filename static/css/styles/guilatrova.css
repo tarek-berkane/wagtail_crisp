@@ -1,0 +1,25 @@
+.post-title a.post-link {
+    color: #3459AD
+}
+
+.featured a.post-link,
+#series-content h3 a {
+    font-weight: 800 !important;
+    color: black;
+}
+
+#series-content section {
+    padding-left: 1em;
+}
+
+#series-content h3 {
+    margin-bottom: 0;
+}
+
+#series-content p {
+    margin: 0;
+}
+
+.footnotes small {
+    line-height: initial;
+}

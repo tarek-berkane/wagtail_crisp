@@ -1,0 +1,49 @@
+<div class="subscribe-form-wrapper">
+  <h2 class="subscribe-heading">
+    🚀 Don't miss the next posts! 📥
+  </h2>
+
+  <form id="formId" action="{% url 'subscribe-view' %}" method="post" name="revue-form" />
+    {% comment %} <input class="revue-form-field" placeholder="Email" type="email" name="member[email]" /> {% endcomment%}
+    {% csrf_token %}
+    {{form}}
+
+    <button id="submitButton" type="submit" name="member[subscribe]">
+      Subscribe
+    </button>
+  </form>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+  const form = document.getElementById('formId')
+  form.addEventListener('submit', (e) => {
+      e.preventDefault();
+   });
+
+  // When DOM is loaded this 
+  // function will get executed
+  $(() => {
+    // function will get executed 
+    // on click of submit button
+    $("#submitButton").click(function (ev) {
+
+      var form = $("#formId");
+      var url = form.attr('action');
+
+      $.ajax({
+        type: "POST",
+        url: '{% url 'subscribe-view' %}',
+        data: form.serialize(),
+        success: function (data) {
+          form.val('');
+          console.log("Form Submited Successfully");
+          //TODO
+        },
+        error: function (data) {
+          console.log("some Error");
+          //TODO
+        }
+      });
+    });
+  });
+</script>

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static humanize wagtailcore_tags %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/monokai-sublime.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+<link rel="stylesheet" href="{% static 'css/styles/subscribe-popup.css' %}">
+<link rel="stylesheet" href="{% static 'css/styles/subscribe-form.css' %}">
+<link rel="stylesheet" href="{% static 'css/styles/rrssb.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<article id="{{comment_id}}" class="{{post_class}}">
+    <h1 class="post-title">{{page.title}}</h1>
+	<div class="post-stamp">
+        <span class="commit-signature">
+            <a href="#">{{page.owner.username}}</a>
+			commited <span style="color: rgb(61, 59, 59);">{{page.last_published_at|naturalday}}</span>
+		</span>
+		<span class="taglist">
+			{% for tag in page.specific.tags.all %}
+			<a href="{% slugurl 'home' %}?tag={{tag}}">{{tag}}</a>
+			{% endfor %}
+		</span>
+	</div>
+	{{page.content}}
+	{% include '_partail/share.html' %}
+	{% if not already_subscribe %}
+		{% include 'subscribe/_partail/subscribe.html' %}
+	{% endif %}
+	{% include '_partail/disqus.html' %}
+</article>
+{% endblock content %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- For the highlight badge -->
+<script src="https://unpkg.com/highlightjs-badge/highlightjs/highlight.pack.js"></script>
+<script src="https://unpkg.com/highlightjs-badge/highlightjs-badge.min.js"></script>
+<script>
+	hljs.initHighlightingOnLoad();
+	document.addEventListener("DOMContentLoaded", (event) => {
+		var pres = document.querySelectorAll("pre>code");
+		for (var i = 0; i < pres.length; i++) {
+			hljs.highlightBlock(pres[i]);
+		}
+
+		var options = {
+			contentSelector: "article",
+			loadDelay:0,
+			copyIconClass: "code-badge-copy-icon",
+			checkIconClass: "code-badge-check-icon",
+			onBeforeCodeCopied: function(text, codeElement) {
+				if (typeof isInteractive !== 'undefined') {
+					if (isInteractive && editor) {
+						if (!codeSpaceOpen) {
+							toggleCodeSpace();
+						}
+
+						editor.setValue(text, 1);
+						editor.focus();
+					}
+				}
+
+				return text;
+			}
+		};
+
+		window.highlightJsBadge(options);
+	});
+	hljs.configure({tabReplace: '   '})
+
+</script>
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+{% endblock extra_js %}

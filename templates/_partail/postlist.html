@@ -1,0 +1,25 @@
+{% load wagtailcore_tags humanize %}
+
+
+{% if result.object_list   %}
+	{% for post in result.object_list %}
+	<section id="{{comment_id}}" class="{{post_class}}">
+		<h3 class="post-title">
+			
+			<a href="{% pageurl post %}" class="post-link">
+				{{post.title}}
+			</a>
+			
+			<span class="separator"> &middot; </span>{{post.last_published_at|date}}
+			<span class="taglist">
+				{% for tag in post.specific.tags.all %}
+				<a href="{% slugurl 'home' %}?tag={{tag}}">{{tag}}</a>
+				{% endfor %}
+			</span>
+		</h3>
+	</section>
+	{% endfor %}
+	{% include '_partail/pagination.html' with result=result %}
+{% else %}
+	{% include '_partail/no_result.html' %}
+{% endif %}

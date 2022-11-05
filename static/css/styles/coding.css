@@ -1,0 +1,193 @@
+/* Highlightjs */
+.code-badge {
+    background: #fff !important;
+}
+.code-badge-language {
+  display: none;
+}
+.code-badge-copy-icon {
+  background: url("data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhciIgZGF0YS1pY29uPSJjb3B5IiBjbGFzcz0ic3ZnLWlubGluZS0tZmEgZmEtY29weSBmYS13LTE0IiByb2xlPSJpbWciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDQ0OCA1MTIiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTQzMy45NDEgNjUuOTQxbC01MS44ODItNTEuODgyQTQ4IDQ4IDAgMCAwIDM0OC4xMTggMEgxNzZjLTI2LjUxIDAtNDggMjEuNDktNDggNDh2NDhINDhjLTI2LjUxIDAtNDggMjEuNDktNDggNDh2MzIwYzAgMjYuNTEgMjEuNDkgNDggNDggNDhoMjI0YzI2LjUxIDAgNDgtMjEuNDkgNDgtNDh2LTQ4aDgwYzI2LjUxIDAgNDgtMjEuNDkgNDgtNDhWOTkuODgyYTQ4IDQ4IDAgMCAwLTE0LjA1OS0zMy45NDF6TTI2NiA0NjRINTRhNiA2IDAgMCAxLTYtNlYxNTBhNiA2IDAgMCAxIDYtNmg3NHYyMjRjMCAyNi41MSAyMS40OSA0OCA0OCA0OGg5NnY0MmE2IDYgMCAwIDEtNiA2em0xMjgtOTZIMTgyYTYgNiAwIDAgMS02LTZWNTRhNiA2IDAgMCAxIDYtNmgxMDZ2ODhjMCAxMy4yNTUgMTAuNzQ1IDI0IDI0IDI0aDg4djIwMmE2IDYgMCAwIDEtNiA2em02LTI1NmgtNjRWNDhoOS42MzJjMS41OTEgMCAzLjExNy42MzIgNC4yNDMgMS43NTdsNDguMzY4IDQ4LjM2OGE2IDYgMCAwIDEgMS43NTcgNC4yNDNWMTEyeiI+PC9wYXRoPjwvc3ZnPg==");
+  background-size: 100% 100%;
+}
+.code-badge > .code-badge-check-icon {
+  background: green;
+}
+.code-badge-check-icon {
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 0 7px;
+  background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGFyaWEtaGlkZGVuPSJ0cnVlIiBmb2N1c2FibGU9ImZhbHNlIiBkYXRhLXByZWZpeD0iZmFzIiBkYXRhLWljb249ImNoZWNrIiBjbGFzcz0ic3ZnLWlubGluZS0tZmEgZmEtY2hlY2sgZmEtdy0xNiIgcm9sZT0iaW1nIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgc3R5bGU9IiYjMTA7ICAgIGNvbG9yOiAjMmFmZjMyOyYjMTA7Ij48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik0xNzMuODk4IDQzOS40MDRsLTE2Ni40LTE2Ni40Yy05Ljk5Ny05Ljk5Ny05Ljk5Ny0yNi4yMDYgMC0zNi4yMDRsMzYuMjAzLTM2LjIwNGM5Ljk5Ny05Ljk5OCAyNi4yMDctOS45OTggMzYuMjA0IDBMMTkyIDMxMi42OSA0MzIuMDk1IDcyLjU5NmM5Ljk5Ny05Ljk5NyAyNi4yMDctOS45OTcgMzYuMjA0IDBsMzYuMjAzIDM2LjIwNGM5Ljk5NyA5Ljk5NyA5Ljk5NyAyNi4yMDYgMCAzNi4yMDRsLTI5NC40IDI5NC40MDFjLTkuOTk4IDkuOTk3LTI2LjIwNyA5Ljk5Ny0zNi4yMDQtLjAwMXoiLz48L3N2Zz4=");
+  background-size: 100% 100%;
+}
+
+/* XTerm Scroolbar */
+.xterm .xterm-viewport {
+  /* On OS X this is required in order for the scroll bar to appear fully opaque */
+  background-color: transparent;
+  overflow-y: scroll;
+  cursor: default;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  scrollbar-color: #555 #2F3129;
+  scrollbar-width: thin;
+}
+
+.xterm-viewport::-webkit-scrollbar {
+  background-color: #2F3129;
+  width: 5px;
+}
+
+.xterm-viewport::-webkit-scrollbar-thumb {
+  background: #555;
+}
+
+/* Ace Editor */
+#ace-editor {
+  height: 100%;
+}
+
+/* Code Space */
+#code-space-wrapper {
+  position: fixed;
+  width: 90%;
+  bottom: 0;
+
+  z-index: 3;
+  left: 50%;
+  transform: translateY(calc(100% - 35px)) translateX(-50%);
+  transition: transform 1s;
+}
+
+#code-space-wrapper.open {
+  transform: translateX(-50%);
+}
+
+#code-space {
+  display: flex;
+  flex-direction: row;
+  background: #bbb /* This + child margin creates a similar vertical bar */
+}
+
+.code-space-child {
+  flex-basis: 50%
+}
+
+#code-space .code-space-child:first-child {
+  margin-right: 1px;
+}
+
+#code-space-bottom-bar {
+  display: flex;
+  flex-flow: row-reverse;
+
+  position: relative;
+  margin-top: -40px;
+  padding-right: 5px;
+
+  /* Required because Xterm canvas uses up to z-index 4 */
+  z-index: 5;
+}
+
+#code-space-bottom-bar button {
+  border: 1px solid transparent;
+  border-radius: .25rem;
+
+  cursor: pointer;
+
+  padding: .375rem .75rem;
+  line-height: 1.5;
+  font-weight: bold;
+}
+
+#code-space-bottom-bar button.execute {
+  background-color: #15b532;
+  color: #fff;
+}
+
+#code-space-bottom-bar button.clear {
+  background-color: #007bff;
+  color: #fff;
+}
+
+@media(max-width: 800px) {
+  #code-space {
+    display: none
+  }
+}
+
+/* Code Space Top Toolbar */
+/* Inspired by: https://codepen.io/swillis/pen/RwzpbP */
+#code-space-wrapper .outer {
+  background: #273138;
+  opacity: 0.9;
+
+  box-sizing: border-box;
+  padding: 0 10px;
+  width: 100%;
+  border-radius: 7px 7px 0px 0px;
+}
+
+#code-space-wrapper .outer .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #f9f9f9;
+  border-radius: 50%;
+  margin: 0 4px 0 0;
+
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Code Space Top Toolbar Buttons */
+#code-space-wrapper .outer .dot.red {
+  background: #FF6057;
+  border: 1px solid #E14640;
+  color: #820005
+}
+
+#code-space-wrapper .outer .dot.red:active {
+  background: #c14645;
+  border: 1px solid #b03537;
+  color: #4e0002;
+}
+
+#code-space-wrapper .outer .dot.amber {
+  background: #FFBD2E;
+  border: 1px solid #DFA123;
+  color: #9a5518;
+}
+
+#code-space-wrapper .outer .dot.amber:active {
+  background: #c08e38;
+  border: 1px solid #af7c33;
+  color: #5a2607
+}
+
+#code-space-wrapper .outer .dot.green {
+  background: #27C93F;
+  border: 1px solid #1DAD2B;
+  color: #006519;
+}
+
+#code-space-wrapper .outer .dot.green:active {
+  background: #029740;
+  border: 1px solid #128435;
+  color: #003107;
+}
+
+#code-space-wrapper .outer .dot span {
+  display: none;
+
+  text-align: center;
+  font-weight: 700;
+  line-height: 9px;
+  font-size: small;
+}
+
+#code-space-wrapper .outer:hover .dot span {
+  display: block;
+}

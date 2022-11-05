@@ -1,0 +1,149 @@
+{% load static %}
+<div class="popup-container" style="display: none">
+  <div class="popup">
+    <img
+      class="popup__illustration"
+      src="{% static '/img/popup-actor.png' %}"
+    />
+    <div class="popup__prompt popup-prompt">
+      <p class="popup-prompt__text">
+        Hi there! Are you enjoying what you're
+        reading? If you do, you can be the first to know when I post cool stuff!
+      </p>
+      <div class="popup-prompt__footer">
+        <button onclick="showSubscribeForm(event)" class="popup-prompt__confirm-btn">
+          Sure! Let me know
+        </button>
+
+        <button onclick="onDontSubscribe(event)" class="popup-prompt__cancel-btn">
+          No, thanks
+        </button>
+      </div>
+      <svg
+        class="popup-prompt__tail"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 47.645 65.664"
+      >
+        <path
+          d="M-732.027,1721.712s-31.75,2.7-47.1-23.279c-.149-.252-.348-.6-.544-.949s4.251,33.712,33.232,52.045c.638.274,4.763,2.371,5.419,2.686,8.411,3.559,8.988,10.931,8.988,10.931Z"
+          transform="translate(779.673 -1697.48)"
+          fill="#fff"
+        ></path>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<div class="popup-subscribe-container" style="display: none">
+  <div class="popup-subscribe-content">
+    <div class="popup-subscribe-content-x" onclick="closeSubscribeForm(event)">
+      <div class="one"></div>
+      <div class="two"></div>
+    </div>
+    {% include 'subscribe/_partail/subscribe.html' %}
+  </div>
+</div>
+
+<script>
+    var popupContainer = document.querySelector('.popup-container')
+    var popupPrompt = document.querySelector('.popup-prompt')
+    var subscribePopup = document.querySelector('.popup-subscribe-container')
+    var subscribeContent = document.querySelector('.popup-subscribe-content')
+    /* If the user close the popup, don't show it again */
+    var popupClosed = false
+
+    popupContainer.addEventListener('animationend', function (e) {
+      if (popupContainer.classList.contains('popup-container--show')) {
+        setTimeout(function () {
+          popupPrompt.classList.add('popup-prompt--show')
+        }, 1000)
+      }
+    })
+
+    function onDontSubscribe() {
+      const today = new Date()
+      const tomorrow = new Date(today)
+      tomorrow.setDate(tomorrow.getDate() + 1)
+
+      localStorage.dontBotherUntil = tomorrow
+      localStorage.subscribed = false
+
+      closePopup()
+    }
+
+    function onSubscribe() {
+      localStorage.subscribed = true
+    }
+
+    function shouldShowPopup() {
+      const now = new Date()
+      const dontBotherUntil = new Date(localStorage.dontBotherUntil)
+
+      if (localStorage.subscribed == "true") {
+        return false
+      }
+
+      if (now < dontBotherUntil) {
+        return false
+      }
+
+      return true
+    }
+
+    function showPopup() {
+      if (shouldShowPopup()) {
+        if (popupContainer.hasAttribute('style'))
+          popupContainer.style.display = ''
+
+        if (!popupClosed && !popupContainer.classList.contains('popup-container--show'))
+          popupContainer.classList.add('popup-container--show')
+      }
+    }
+
+    function closePopup() {
+      popupPrompt.classList.remove('popup-prompt--show')
+
+      setTimeout(function () {
+        popupContainer.classList.remove('popup-container--show')
+        popupClosed = true
+      }, 200)
+    }
+
+    function closeSubscribeForm() {
+      subscribePopup.classList.remove('popup-subscribe-content--show')
+      setTimeout(function () {
+        subscribePopup.style.display = 'none'
+      }, 200)
+    }
+
+    function showSubscribeForm() {
+      onSubscribe()
+      closePopup()
+      if (subscribePopup.hasAttribute('style'))
+        subscribePopup.style.display = ''
+        setTimeout(function () {
+          subscribeContent.classList.add('popup-subscribe-content--show')
+        }, 200)
+    }
+
+    function setupFrontendorPopup(options) {
+      window.addEventListener("scroll", function () {
+        var scrollTop = window.scrollY;
+        var docHeight = document.body.offsetHeight;
+        var winHeight = window.innerHeight;
+        var percentage = Math.round(scrollTop * 100 / (docHeight - winHeight));
+
+        if (options && options.percentage) {
+          var userPercentage = options.percentage.replace(/\%/gm, '').trim()
+          if (parseInt(userPercentage) >= percentage && parseInt(userPercentage) <= percentage + 10) {
+            showPopup()
+          }
+        } else {
+          showPopup()
+        }
+      });
+    }
+</script>
+<script>
+  setupFrontendorPopup({ percentage: "90" })
+</script>

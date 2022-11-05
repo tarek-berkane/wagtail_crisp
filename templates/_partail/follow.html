@@ -1,0 +1,23 @@
+<div id="follow-icons">
+	<span style="margin: 0 5px;font-size: 18px;color:white">Contact</span>
+	{% if settings.config.SocialMediaSettings.email %}
+		<a href="mailto:{{settings.config.SocialMediaSettings.email}}" target="_blank" rel="noopener noreferrer"><i class="fa fa-envelope-square fa-2x"></i></a>
+	{% endif %}
+	{% if settings.config.SocialMediaSettings.linkedin %}
+		<a href="{{settings.config.SocialMediaSettings.linkedin}}" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin-square fa-2x"></i></a>
+	{% endif %}
+
+	{% if settings.config.SocialMediaSettings.twitter %}
+		<a href="{{settings.config.SocialMediaSettings.twitter}}" target="_blank" rel="noopener noreferrer"><i class="fa  fa-twitter-square fa-2x"></i></a>
+	{% endif %}
+		
+	{% if settings.config.SocialMediaSettings.youtube %}
+		<a href="{{settings.config.SocialMediaSettings.youtube}}" target="_blank" rel="noopener noreferrer"><i class="fa fa-youtube-square fa-2x"></i></a>
+	{% endif %}
+		
+	{% if settings.config.SocialMediaSettings.github %}
+		<a href="{{settings.config.SocialMediaSettings.github}}" target="_blank" rel="noopener noreferrer"><i class="fa fa-github-square fa-2x"></i></a>
+	{% endif %}
+
+	
+</div>

@@ -1,0 +1,9 @@
+<nav class="pagination" role="pagination">
+    {% if result.has_previous %}
+        <a class="newer-posts" href="?{{url_parameter}}p={{result.previous_page_number}}">&larr; Newer</a> <span class="separator">|</span> 
+    {% endif %}
+    <span class="page-number">Page {{result.number}} of {{result.paginator.num_pages}}</span>
+    {% if result.has_next %}
+         <span class="separator">|</span> <a class="older-posts" href="?{{url_parameter}}p={{result.next_page_number}}">Older &rarr;</a>
+    {% endif %}
+</nav>

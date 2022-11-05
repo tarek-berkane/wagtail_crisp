@@ -1,0 +1,8 @@
+{% load wagtailcore_tags %}
+
+<nav id='nav-menu' class="menu">
+  <h6><a href="{% slugurl 'home' %}">Home</a></h6>
+  {% for nav in navigation %}
+    <h6><a href="{% pageurl nav %}">{{nav.title}}</a></h6>
+  {% endfor %}
+</nav>

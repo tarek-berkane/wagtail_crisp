@@ -9,7 +9,6 @@ from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
 
-
 from apps.post.models import Post, PostCategory
 from apps.project.models import ProjectIndex
 
@@ -27,8 +26,6 @@ RICH_TEXT_FEATURES = [
 
 # class HomePage(Page):
 #     pass
-
-
 
 
 class HomePage(RoutablePageMixin, Page):
@@ -108,53 +105,14 @@ class Author(Page):
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(
-            [FieldPanel("auth_image"), FieldPanel("full_name")], heading="Main info"
+            [
+                FieldPanel("auth_image"),
+                FieldPanel("full_name"),
+            ],
+            heading="Main info",
         ),
         FieldPanel("content"),
     ]
-
-
-# @register_setting
-# class SocialMediaSettings(BaseSetting):
-#     facebook = models.URLField(blank=True, null=True)
-#     instagram = models.URLField(blank=True, null=True)
-#     youtube = models.URLField(blank=True, null=True)
-#     twitter = models.URLField(blank=True, null=True)
-#     linkedin = models.URLField(blank=True, null=True)
-#     github = models.URLField(blank=True, null=True)
-#     email = models.EmailField(blank=True, null=True)
-
-
-# # Create your models here.
-
-
-# @register_setting
-# class WebsiteInfoSettings(BaseSetting):
-#     side_logo = models.ForeignKey(
-#         "wagtailimages.Image",
-#         on_delete=models.SET_NULL,
-#         related_name="+",
-#         blank=True,
-#         null=True,
-#     )
-
-#     text_logo = models.ForeignKey(
-#         "wagtailimages.Image",
-#         on_delete=models.SET_NULL,
-#         related_name="+",
-#         blank=True,
-#         null=True,
-#     )
-
-#     website_name = models.CharField(max_length=25, default="Website")
-#     website_description = models.CharField(max_length=255, default="Change this text")
-#     disqus_url = models.URLField(null=True, blank=True)
-
-
-# @register_setting
-# class GoogleAnalyticsSettings(BaseSetting):
-#     is_enabled = models.BooleanField(default=False)
-#     account_id = models.CharField(max_length=50, blank=True, null=True)
 
 
 # FORMS
@@ -172,7 +130,6 @@ from wagtailcaptcha.models import WagtailCaptchaEmailForm
 
 
 class FormField(AbstractFormField):
-    # id = models.AutoField()
     page = ParentalKey("FormPage", on_delete=models.CASCADE, related_name="form_fields")
 
 
@@ -187,5 +144,4 @@ class FormPage(WagtailCaptchaEmailForm):
         FieldPanel("intro", classname="full"),
         InlinePanel("form_fields", label="Form fields"),
         FieldPanel("thank_you_text", classname="full"),
-
     ]

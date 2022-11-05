@@ -12,7 +12,6 @@ def subscribe_limit():
     def decorator(func):
         @wraps(func)
         def inner(request: HttpRequest, *args, **kwargs):
-            print("Here")
             if subscribe_count := request.session.get(SUBSCRIBE_COUNT):
                 if subscribe_count > 3:
                     request.session[ALREADY_SUBSCRIBE] = True

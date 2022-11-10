@@ -1,5 +1,8 @@
-from .base import *
+import os
+
 import environ
+
+from .base import *
 
 env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
@@ -38,6 +41,7 @@ LOGGING = {
 }
 
 
+
 PUBLIC_DIR = env("PUBLIC_DIR")
 
 STATIC_ROOT = os.path.join(PUBLIC_DIR, "static")
@@ -46,6 +50,19 @@ STATIC_URL = "/static/"
 MEDIA_ROOT = os.path.join(PUBLIC_DIR, "media")
 MEDIA_URL = "/media/"
 
+
+# settings.py
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "OPTIONS": {
+            "read_default_file": os.path.join(BASE_DIR, "my.cnf"),
+            'sql_mode': 'traditional',
+        },
+   }
+}
+
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 
 try:
     from .local import *

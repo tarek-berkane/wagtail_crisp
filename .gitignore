@@ -4,5 +4,6 @@ my_env/
 media/*
 
 .env
+my.cnf
 
 db.sqlite3

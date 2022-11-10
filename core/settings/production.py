@@ -4,8 +4,11 @@ import environ
 
 from .base import *
 
+# Change it to your config file path
+config_file = "/home/coding43/config/codingdz_blog"
+
 env = environ.Env()
-environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+environ.Env.read_env(os.path.join(config_file, ".env"))
 
 
 DEBUG = False
@@ -56,7 +59,7 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
         "OPTIONS": {
-            "read_default_file": os.path.join(BASE_DIR, "my.cnf"),
+            "read_default_file": os.path.join(config_file, "my.cnf"),
             'sql_mode': 'traditional',
         },
    }

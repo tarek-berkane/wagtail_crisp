@@ -4,10 +4,10 @@ install:
 	pip install -r requirements.txt
 
 makemigrations:
-	python manage.py makemigrations	noinput
+	python manage.py makemigrations	--noinput
 
 migrate:
-	python manage.py migrate noinput
+	python manage.py migrate --noinput
 
 
 collectstatic:

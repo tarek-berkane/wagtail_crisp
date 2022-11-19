@@ -43,7 +43,7 @@ telepath==0.3
 tomli==2.0.1
 typing-extensions==4.4.0
 urllib3==1.26.12
-wagtail==4.1
+wagtail==4.1.1
 wagtail-django-simple-captcha==1.0
 webencodings==0.5.1
 Willow==1.4.1

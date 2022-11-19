@@ -1,7 +1,8 @@
 from django.db import models
 from django.core.paginator import Paginator
+from django.utils.decorators import method_decorator
 
-from wagtail.admin.edit_handlers import  FieldPanel, MultiFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
 from wagtail.core.models import Page
 from wagtail.core.fields import StreamField, RichTextField
 from wagtail.core.blocks import RichTextBlock
@@ -16,6 +17,8 @@ from apps.post.blocks import HeaderBlock, ImageBlock, QuoteBlock, CodeBlock
 from apps.subscribe.constants import ALREADY_SUBSCRIBE
 from apps.subscribe.forms import SubscribeForm
 from apps.subscribe.services import already_subscribed
+
+from core.utils import cache_page_if_not_preview
 
 RICH_TEXT_FEATURES = [
     "bold",
@@ -34,6 +37,7 @@ class PostPageTag(TaggedItemBase):
     )
 
 
+@method_decorator(cache_page_if_not_preview, name="serve")
 class CategoryIndex(RoutablePageMixin, Page):
     max_count = 1
     parent_page_types = ["home.HomePage"]
@@ -58,6 +62,7 @@ class CategoryIndex(RoutablePageMixin, Page):
         )
 
 
+@method_decorator(cache_page_if_not_preview, name="serve")
 class PostCategory(RoutablePageMixin, Page):
     parent_page_types = ["post.CategoryIndex"]
     subpage_types = ["post.Post"]
@@ -87,6 +92,7 @@ class PostCategory(RoutablePageMixin, Page):
         )
 
 
+@method_decorator(cache_page_if_not_preview, name="serve")
 class Post(Page):
     parent_page_types = ["post.PostCategory", "project.ProjectIndex"]
     tags = ClusterTaggableManager(through=PostPageTag, blank=True)
@@ -101,7 +107,8 @@ class Post(Page):
             ("image", ImageBlock()),
             ("table", TableBlock()),
             ("code", CodeBlock()),
-        ],use_json_field=True
+        ],
+        use_json_field=True,
     )
 
     content_panels = Page.content_panels + [

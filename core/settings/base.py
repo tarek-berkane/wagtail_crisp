@@ -53,12 +53,13 @@ INSTALLED_APPS = [
     # LIBRARIES
     "wagtailcaptcha",
     "captcha",
-    # APPS    
+    # APPS
     "apps.home",
     "apps.post",
     "apps.project",
     "apps.subscribe",
     "apps.config",
+    "apps.monitor",
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+    "apps.monitor.middleware.statics_middleware",
 ]
 
 ROOT_URLCONF = "core.urls"
@@ -88,7 +90,6 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "apps.home.custom_context_processor.get_navigation",
-
             ],
         },
     },
@@ -182,4 +183,4 @@ WAGTAILSEARCH_BACKENDS = {
 WAGTAILADMIN_BASE_URL = "http://example.com"
 
 
-DEFAULT_AUTO_FIELD="django.db.models.BigAutoField"
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

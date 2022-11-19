@@ -44,7 +44,6 @@ LOGGING = {
 }
 
 
-
 PUBLIC_DIR = env("PUBLIC_DIR")
 
 STATIC_ROOT = os.path.join(PUBLIC_DIR, "static")
@@ -60,12 +59,25 @@ DATABASES = {
         "ENGINE": "django.db.backends.mysql",
         "OPTIONS": {
             "read_default_file": os.path.join(config_file, "my.cnf"),
-            'sql_mode': 'traditional',
+            "sql_mode": "traditional",
         },
-   }
+    }
 }
 
-SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    }
+}
+
+REDIS_PAGE_STATICS_SERVICE_NAME = "codingdz:pages_statistics"
+
+
+SILENCED_SYSTEM_CHECKS = ["captcha.recaptcha_test_key_error"]
 
 try:
     from .local import *

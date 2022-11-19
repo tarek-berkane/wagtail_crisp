@@ -1,0 +1,282 @@
+{% extends "wagtailadmin/base.html" %}
+{% load static %}
+{% block titletag %}{{ current_year }} calendar{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+    table.month {
+        margin: 20px;
+    }
+
+    table.month td,
+    table.month th {
+        padding: 5px;
+    }
+</style>
+<link rel="stylesheet" href="{% static 'css/vendor/tabler.min.css' %}" type="text/css" />
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script src="{% static 'js/vendor/tabler.min.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+{% endblock %}
+
+
+{% block content %}
+{% include "wagtailadmin/shared/header.html" with title="Calendar" icon="bars" %}
+
+<div class="page-wrapper">
+    <div class="container-xl">
+        <h3 >Last 24 Hours</h3>
+        <div class="card">
+            <div class="card-body">
+                <div id="chart-24-hours" class="chart-lg"></div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                window.ApexCharts && (new ApexCharts(document.getElementById('chart-24-hours'), {
+                    chart: {
+                        type: "line",
+                        fontFamily: 'inherit',
+                        height: 240,
+                        parentHeightOffset: 0,
+                        toolbar: {
+                            show: false,
+                        },
+                        animations: {
+                            enabled: false
+                        },
+                    },
+                    fill: {
+                        opacity: 1,
+                    },
+                    stroke: {
+                        width: 2,
+                        lineCap: "round",
+                        curve: "straight",
+                    },
+                    series: [{
+                        name: "Total Visits",
+                        data: [53, 51, 52, 41, 46, 60, 45, 43, 30, 50, 58, 59]
+                    }],
+                    grid: {
+                        padding: {
+                            top: -20,
+                            right: 0,
+                            left: -4,
+                            bottom: -4
+                        },
+                        strokeDashArray: 4,
+                    },
+                    xaxis: {
+                        labels: {
+                            padding: 0,
+                        },
+                        tooltip: {
+                            enabled: false
+                        },
+                    },
+                    yaxis: {
+                        labels: {
+                            padding: 4
+                        },
+                    },
+                    labels: [
+                        '17:00', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-06-30', '2020-07-01', '2020-07-02'
+                    ],
+                    colors: ["#fab005", "#5eba00", "#206bc4"],
+                    legend: {
+                        show: true,
+                        position: 'bottom',
+                        offsetY: 12,
+                        markers: {
+                            width: 10,
+                            height: 10,
+                            radius: 100,
+                        },
+                        itemMargin: {
+                            horizontal: 8,
+                            vertical: 8
+                        },
+                    },
+                })).render();
+            });
+        </script>
+
+        <h3 class='mt-4'>Last 7 Days</h3>
+        <div class="card">
+            <div class="card-body">
+                <div id="chart-7-days" class="chart-lg"></div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                window.ApexCharts && (new ApexCharts(document.getElementById('chart-7-days'), {
+                    chart: {
+                        type: "line",
+                        fontFamily: 'inherit',
+                        height: 240,
+                        parentHeightOffset: 0,
+                        toolbar: {
+                            show: false,
+                        },
+                        animations: {
+                            enabled: false
+                        },
+                    },
+                    fill: {
+                        opacity: 1,
+                    },
+                    stroke: {
+                        width: 2,
+                        lineCap: "round",
+                        curve: "straight",
+                    },
+                    series: [{
+                        name: "Session Duration",
+                        data: [117, 92, 94, 98, 75, 110, 69, 80, 109, 113, 115, 95]
+                    }, {
+                        name: "Page Views",
+                        data: [59, 80, 61, 66, 70, 84, 87, 64, 94, 56, 55, 67]
+                    }, {
+                        name: "Total Visits",
+                        data: [53, 51, 52, 41, 46, 60, 45, 43, 30, 50, 58, 59]
+                    }],
+                    grid: {
+                        padding: {
+                            top: -20,
+                            right: 0,
+                            left: -4,
+                            bottom: -4
+                        },
+                        strokeDashArray: 4,
+                    },
+                    xaxis: {
+                        labels: {
+                            padding: 0,
+                        },
+                        tooltip: {
+                            enabled: false
+                        },
+                        type: 'datetime',
+                    },
+                    yaxis: {
+                        labels: {
+                            padding: 4
+                        },
+                    },
+                    labels: [
+                        '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-06-30', '2020-07-01', '2020-07-02'
+                    ],
+                    colors: ["#fab005", "#5eba00", "#206bc4"],
+                    legend: {
+                        show: true,
+                        position: 'bottom',
+                        offsetY: 12,
+                        markers: {
+                            width: 10,
+                            height: 10,
+                            radius: 100,
+                        },
+                        itemMargin: {
+                            horizontal: 8,
+                            vertical: 8
+                        },
+                    },
+                })).render();
+            });
+        </script>
+
+        <h3 class='mt-4'>Last month</h3>
+        <div class="card">
+            <div class="card-body">
+                <div id="chart-1-month" class="chart-lg"></div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                window.ApexCharts && (new ApexCharts(document.getElementById('chart-1-month'), {
+                    chart: {
+                        type: "line",
+                        fontFamily: 'inherit',
+                        height: 240,
+                        parentHeightOffset: 0,
+                        toolbar: {
+                            show: false,
+                        },
+                        animations: {
+                            enabled: false
+                        },
+                    },
+                    fill: {
+                        opacity: 1,
+                    },
+                    stroke: {
+                        width: 2,
+                        lineCap: "round",
+                        curve: "straight",
+                    },
+                    series: [{
+                        name: "Session Duration",
+                        data: [117, 92, 94, 98, 75, 110, 69, 80, 109, 113, 115, 95]
+                    }, {
+                        name: "Page Views",
+                        data: [59, 80, 61, 66, 70, 84, 87, 64, 94, 56, 55, 67]
+                    }, {
+                        name: "Total Visits",
+                        data: [53, 51, 52, 41, 46, 60, 45, 43, 30, 50, 58, 59]
+                    }],
+                    grid: {
+                        padding: {
+                            top: -20,
+                            right: 0,
+                            left: -4,
+                            bottom: -4
+                        },
+                        strokeDashArray: 4,
+                    },
+                    xaxis: {
+                        labels: {
+                            padding: 0,
+                        },
+                        tooltip: {
+                            enabled: false
+                        },
+                        type: 'datetime',
+                    },
+                    yaxis: {
+                        labels: {
+                            padding: 4
+                        },
+                    },
+                    labels: [
+                        '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-06-30', '2020-07-01', '2020-07-02'
+                    ],
+                    colors: ["#fab005", "#5eba00", "#206bc4"],
+                    legend: {
+                        show: true,
+                        position: 'bottom',
+                        offsetY: 12,
+                        markers: {
+                            width: 10,
+                            height: 10,
+                            radius: 100,
+                        },
+                        itemMargin: {
+                            horizontal: 8,
+                            vertical: 8
+                        },
+                    },
+                })).render();
+            });
+        </script>
+
+
+    </div>
+</div>
+
+{% endblock %}

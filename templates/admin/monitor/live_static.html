@@ -1,0 +1,84 @@
+{% extends "wagtailadmin/base.html" %}
+{% load static %}
+{% block titletag %}{{ current_year }} calendar{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+    table.month {
+        margin: 20px;
+    }
+
+    table.month td,
+    table.month th {
+        padding: 5px;
+    }
+</style>
+<link rel="stylesheet" href="{% static 'css/vendor/tabler.min.css' %}" type="text/css" />
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script src="{% static 'js/vendor/tabler.min.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+{% endblock %}
+
+
+{% block content %}
+{% include "wagtailadmin/shared/header.html" with title="Monitor"   %}
+
+<div class="page-wrapper">
+    <div class="container-xl">
+
+
+        <h3>Last 24 Hours</h3>
+        <div class="card">
+            <div class="card-body">
+                <div id="chart-day-data" class="chart-lg"></div>
+            </div>
+        </div>
+       
+
+        <h3 class="mt-3">Last week data</h3>
+        <div class="card">
+            <div class="card-body">
+                <div id="chart-week-data" class="chart-lg"></div>
+            </div>
+        </div>
+
+        <h3 class="mt-3">Last month data</h3>
+        <div class="card">
+            <div class="card-body">
+                <div id="chart-month-data" class="chart-lg"></div>
+            </div>
+        </div>
+       
+
+
+    </div>
+</div>
+
+<script src="{% static 'js/vendor/jquery-3.6.0.js' %}"></script>
+<script src="{% static 'js/live_data.js' %}"></script>
+<script>
+    let data = null;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            var jsonObj = JSON.parse(this.responseText);
+            data = jsonObj;
+            build_chart(data['day_data'],"chart-day-data");
+            build_chart(data['week_data'],"chart-week-data");
+            build_chart(data['month_data'],"chart-month-data");
+            console.log("Here");
+        }
+    };
+    xhttp.open("GET", "{% url 'page-visit-data' %}", true);
+    xhttp.send();
+
+</script>
+
+
+{% endblock %}

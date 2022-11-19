@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.paginator import Paginator
 from django.http import HttpResponse
+from django.utils.decorators import method_decorator
 
 from wagtail.models import Page
 from wagtail.fields import RichTextField
@@ -12,6 +13,7 @@ from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from apps.post.models import Post, PostCategory
 from apps.project.models import ProjectIndex
 
+from core.utils import cache_page_if_not_preview
 
 RICH_TEXT_FEATURES = [
     "bold",
@@ -28,6 +30,7 @@ RICH_TEXT_FEATURES = [
 #     pass
 
 
+@method_decorator(cache_page_if_not_preview, name="serve")
 class HomePage(RoutablePageMixin, Page):
     max_count = 1
 
@@ -88,6 +91,7 @@ class HomePage(RoutablePageMixin, Page):
         return parameter
 
 
+@method_decorator(cache_page_if_not_preview, name="serve")
 class Author(Page):
     max_count = 1
     parent_page_types = ["home.HomePage"]
@@ -133,6 +137,7 @@ class FormField(AbstractFormField):
     page = ParentalKey("FormPage", on_delete=models.CASCADE, related_name="form_fields")
 
 
+@method_decorator(cache_page_if_not_preview, name="serve")
 class FormPage(WagtailCaptchaEmailForm):
     max_count = 1
 

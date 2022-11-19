@@ -1,0 +1,126 @@
+{% extends "wagtailadmin/base.html" %}
+{% load static %}
+{% block titletag %}{{ current_year }} calendar{% endblock %}
+
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+    table.month {
+        margin: 20px;
+    }
+
+    table.month td,
+    table.month th {
+        padding: 5px;
+    }
+</style>
+<link rel="stylesheet" href="{% static 'css/vendor/tabler.min.css' %}" type="text/css" />
+{% endblock %}
+
+{% block content %}
+{% include "wagtailadmin/shared/header.html" with title="Top Pages" %}
+<div class="page-wrapper">
+    <div class="container-xl">
+
+
+        <h2 class="text-primary">Last 24 Hours</h2>
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3 class="card-title">Most Visited Pages</h3>
+            </div>
+            <div class="card-table table-responsive">
+                <table class="table table-vcenter">
+                    <thead>
+                        <tr>
+                            <th>Page name</th>
+                            <th>Page count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for page in yesterday %}
+                        <tr>
+                            <td>
+                                {{page.page_name}}
+                            </td>
+                            <td>
+                                {{page.dcount}}
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <h2 class="text-primary">Last week</h2>
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3 class="card-title">Most Visited Pages</h3>
+            </div>
+            <div class="card-table table-responsive">
+                <table class="table table-vcenter">
+                    <thead>
+                        <tr>
+                            <th>Page name</th>
+                            <th>Page count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for page in last_week %}
+                        <tr>
+                            <td>
+                                {{page.page_name}}
+                            </td>
+                            <td>
+                                {{page.dcount}}
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+        <h2 class="text-primary">Last month</h2>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Most Visited Pages</h3>
+            </div>
+            <div class="card-table table-responsive">
+                <table class="table table-vcenter">
+                    <thead>
+                        <tr>
+                            <th>Page name</th>
+                            <th>Page count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for page in last_month %}
+                        <tr>
+                            <td>
+                                {{page.page_name}}
+                            </td>
+                            <td>
+                                {{page.dcount}}
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+{% endblock %}

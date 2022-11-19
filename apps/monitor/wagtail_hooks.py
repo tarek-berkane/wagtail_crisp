@@ -1,7 +1,7 @@
 from django.urls import path, reverse
 
 from wagtail.admin.menu import MenuItem, SubmenuMenuItem
-from wagtail.contrib.modeladmin.menus import SubMenu
+from wagtail.contrib.modeladmin.menus import Menu
 from wagtail.core import hooks
 
 
@@ -24,4 +24,4 @@ def register_calendar_menu_item():
         MenuItem("top pages", reverse("top-pages")),
     ]
 
-    return SubmenuMenuItem("Monitor", SubMenu(menu_items))
+    return SubmenuMenuItem("Monitor", Menu(items=menu_items))

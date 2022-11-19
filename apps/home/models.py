@@ -5,7 +5,7 @@ from django.utils.decorators import method_decorator
 
 from wagtail.models import Page
 from wagtail.fields import RichTextField
-from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
@@ -30,7 +30,7 @@ RICH_TEXT_FEATURES = [
 #     pass
 
 
-@method_decorator(cache_page_if_not_preview, name="serve")
+# @method_decorator(cache_page_if_not_preview, name="serve")
 class HomePage(RoutablePageMixin, Page):
     max_count = 1
 

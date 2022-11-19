@@ -1,9 +1,9 @@
 from django.db import models
-from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 
 
 @register_setting
-class SocialMediaSettings(BaseSetting):
+class SocialMediaSettings(BaseSiteSetting):
     facebook = models.URLField(blank=True, null=True)
     instagram = models.URLField(blank=True, null=True)
     youtube = models.URLField(blank=True, null=True)
@@ -17,7 +17,7 @@ class SocialMediaSettings(BaseSetting):
 
 
 @register_setting
-class WebsiteInfoSettings(BaseSetting):
+class WebsiteInfoSettings(BaseSiteSetting):
     side_logo = models.ForeignKey(
         "wagtailimages.Image",
         on_delete=models.SET_NULL,
@@ -40,6 +40,6 @@ class WebsiteInfoSettings(BaseSetting):
 
 
 @register_setting
-class GoogleAnalyticsSettings(BaseSetting):
+class GoogleAnalyticsSettings(BaseSiteSetting):
     is_enabled = models.BooleanField(default=False)
     account_id = models.CharField(max_length=50, blank=True, null=True)

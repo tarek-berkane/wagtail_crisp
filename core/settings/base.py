@@ -185,3 +185,5 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+FILE_NAME = "ping_file.json"

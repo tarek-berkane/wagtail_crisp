@@ -9,3 +9,4 @@ media/*
 my.cnf
 
 db.sqlite3
+ping_file.json

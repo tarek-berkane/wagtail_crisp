@@ -3,6 +3,7 @@ from datetime import timedelta
 
 from django.db.models import Q
 from django.utils import timezone
+from django.urls import resolve
 
 from apps.monitor.models import PageRequest
 
@@ -41,3 +42,23 @@ def get_last_week_page_visit(extract_from: Optional[List[PageRequest]] = None):
 
 def get_last_month_page_visit(extract_from: Optional[List[PageRequest]] = None):
     return get_last_page_visit(extract_from, interval_days=timedelta(days=30))
+
+
+def filter_only_page(data: List[PageRequest]):
+    filtered_data = []
+    for page in data:
+        match = resolve(page.page_name)
+        if match.url_name == "wagtail_serve":
+            filtered_data.append(page)
+
+    return filtered_data
+
+
+def filter_only_pages_dict(data: List[dict]):
+    filtered_data = []
+    for page in data:
+        match = resolve(page["page_name"])
+        if match.url_name == "wagtail_serve":
+            filtered_data.append(page)
+
+    return filtered_data

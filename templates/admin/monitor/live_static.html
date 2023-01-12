@@ -30,8 +30,10 @@
 
 <div class="page-wrapper">
     <div class="container-xl">
-
-
+        <div class="mb-3">
+            <label for="show-only-pages" style="font-size: 18px;font-weight: 500;margin: 0 10px ;"  >Show only pages</label>
+            <input type="checkbox" class="form-control" name="" id="show-only-pages" onchange="update_data(this);">
+        </div>
         <h3>Last 24 Hours</h3>
         <div class="card">
             <div class="card-body">
@@ -62,22 +64,34 @@
 <script src="{% static 'js/vendor/jquery-3.6.0.js' %}"></script>
 <script src="{% static 'js/live_data.js' %}"></script>
 <script>
-    let data = null;
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
-            var jsonObj = JSON.parse(this.responseText);
-            data = jsonObj;
-            build_chart(data['day_data'],"chart-day-data");
-            build_chart(data['week_data'],"chart-week-data");
-            build_chart(data['month_data'],"chart-month-data");
-            console.log("Here");
-        }
-    };
-    xhttp.open("GET", "{% url 'page-visit-data' %}", true);
-    xhttp.send();
+    var only_page = false; 
+    function request_data(){
+        let data = null;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+                var jsonObj = JSON.parse(this.responseText);
+                data = jsonObj;
+                build_chart(data['day_data'],"chart-day-data");
+                build_chart(data['week_data'],"chart-week-data");
+                build_chart(data['month_data'],"chart-month-data");
+            }
+        };
+        xhttp.open("GET", `{% url 'page-visit-data' %}?only_page=${only_page}`, true);
+        xhttp.send();
+    }
 
+    request_data();
+    function update_data(checkbox){
+        console.log(checkbox)
+        if(checkbox.checked){
+            only_page= true;
+        }else{
+            only_page = false;
+        }
+        request_data();
+    }
 </script>
 
 

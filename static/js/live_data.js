@@ -11,6 +11,9 @@ function build_chart(data,element_id) {
         y_data.push(data[i]);
     }
 
+    var element = document.getElementById(element_id);
+    element.innerHTML = "";
+
     window.ApexCharts && (new ApexCharts(document.getElementById(element_id), {
         chart: {
             type: "line",

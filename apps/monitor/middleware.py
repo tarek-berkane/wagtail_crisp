@@ -1,4 +1,5 @@
 from django.http import HttpRequest
+from django.urls import resolve
 
 from apps.monitor.utils import increment_page_startcis_for_users
 

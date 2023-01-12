@@ -77,9 +77,19 @@ def index(request):
 
 @cache_page(60 * 20)
 def top_pages(request):
-    yesterday = get_top_pages(timezone.now() - timedelta(days=1))[:10]
-    last_week = get_top_pages(timezone.now() - timedelta(days=7))[:10]
-    last_month = get_top_pages(timezone.now() - timedelta(days=30))[:10]
+    only_page = False
+    if request.GET.get("only_page") == "true":
+        only_page = True
+
+    yesterday = get_top_pages(timezone.now() - timedelta(days=1), only_page=only_page)
+    yesterday = yesterday[:10]
+
+    last_week = get_top_pages(timezone.now() - timedelta(days=7), only_page=only_page)
+    last_week = last_week[:10]
+
+    last_month = get_top_pages(timezone.now() - timedelta(days=30), only_page=only_page)
+    last_month = last_month[:10]
+
     return render(
         request,
         "admin/monitor/top_pages.html",
@@ -93,5 +103,8 @@ def top_pages(request):
 
 @cache_page(60 * 20)
 def page_visit_data(request):
-    data = get_general_data_statistics()
+    only_page = False
+    if request.GET.get("only_page") == "true":
+        only_page = True
+    data = get_general_data_statistics(only_page=only_page)
     return JsonResponse(data=data)

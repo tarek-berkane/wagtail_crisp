@@ -46,11 +46,11 @@ LOGGING = {
 
 PUBLIC_DIR = env("PUBLIC_DIR")
 
-STATIC_ROOT = os.path.join(PUBLIC_DIR, "static")
-STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(PUBLIC_DIR, "crisp_static")
+STATIC_URL = "/crisp_static/"
 
-MEDIA_ROOT = os.path.join(PUBLIC_DIR, "media")
-MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(PUBLIC_DIR, "crisp_media")
+MEDIA_URL = "/crisp_media/"
 
 
 # settings.py
@@ -77,7 +77,9 @@ CACHES = {
 REDIS_PAGE_STATICS_SERVICE_NAME = "codingdz:pages_statistics"
 
 
-SILENCED_SYSTEM_CHECKS = ["captcha.recaptcha_test_key_error"]
+SILENCED_SYSTEM_CHECKS = [
+    "captcha.recaptcha_test_key_error",
+]
 
 try:
     from .local import *

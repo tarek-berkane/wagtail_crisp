@@ -5,7 +5,7 @@ import environ
 from .base import *
 
 # Change it to your config file path
-config_file = "/home/coding43/config/codingdz_blog"
+config_file = "/home/coding43/config/crisp_blog"
 
 env = environ.Env()
 environ.Env.read_env(os.path.join(config_file, ".env"))

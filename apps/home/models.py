@@ -54,7 +54,7 @@ class HomePage(RoutablePageMixin, Page):
 
     def get_queryset(self, post_type, tag):
 
-        post = Post.objects.all().live()
+        post = Post.objects.all().live().order_by('-first_published_at')
 
         if post_type == "post":
             parent_type = PostCategory.objects.first()

@@ -1,8 +1,8 @@
 from django.urls import path, reverse
 
 from wagtail.admin.menu import MenuItem, SubmenuMenuItem
-from wagtail.contrib.modeladmin.menus import Menu
-from wagtail.core import hooks
+from wagtail.admin.menu import Menu
+from wagtail import hooks
 
 
 from apps.monitor.views import index, page_visit_data, top_pages

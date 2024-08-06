@@ -8,7 +8,6 @@ def page_not_found(request: HttpRequest, exception):
 
 
 def server_error(request: HttpRequest, **kwargs):
-    print(kwargs)
     return render(request, "500.html", status=500)
 
 

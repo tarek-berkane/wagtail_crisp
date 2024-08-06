@@ -6,7 +6,7 @@ class PostConfig(AppConfig):
     name = "apps.post"
 
     def ready(self) -> None:
-        from wagtail.core.signals import page_published
+        from wagtail.signals import page_published
         from apps.post.signals import update_content_tracker
         from apps.post.models import Post
         from django.conf import settings

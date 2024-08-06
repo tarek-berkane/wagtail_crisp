@@ -1,7 +1,7 @@
 anyascii==0.3.1
 asgiref==3.5.2
 async-timeout==4.0.2
-backports.zoneinfo==0.2.1
+#backports.zoneinfo==0.2.1
 beautifulsoup4==4.11.1
 black==22.10.0
 certifi==2022.9.24

@@ -6,14 +6,27 @@ from django.utils.decorators import method_decorator
 from wagtail.models import Page
 from wagtail.fields import RichTextField
 from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
-from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel
+from wagtail.admin.panels import MultiFieldPanel, FieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+from modelcluster.fields import ParentalKey
+from wagtail.admin.panels import (
+    FieldPanel,
+    FieldRowPanel,
+    InlinePanel,
+    MultiFieldPanel,
+)
+from wagtail.fields import RichTextField
+from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
+from wagtail.contrib.forms.panels import FormSubmissionsPanel
+from wagtailcaptcha.models import WagtailCaptchaEmailForm
 
 
 from apps.post.models import Post, PostCategory
 from apps.project.models import ProjectIndex
 
 from core.utils import cache_page_if_not_preview
+
+
 
 RICH_TEXT_FEATURES = [
     "bold",
@@ -26,10 +39,9 @@ RICH_TEXT_FEATURES = [
 ]
 
 
-# class HomePage(Page):
-#     pass
-
-
+#===============================
+# MARK: - HomePage
+#===============================
 # @method_decorator(cache_page_if_not_preview, name="serve")
 class HomePage(RoutablePageMixin, Page):
     max_count = 1
@@ -90,7 +102,9 @@ class HomePage(RoutablePageMixin, Page):
 
         return parameter
 
-
+#===============================
+# MARK: - Author
+#===============================
 @method_decorator(cache_page_if_not_preview, name="serve")
 class Author(Page):
     max_count = 1
@@ -119,20 +133,10 @@ class Author(Page):
     ]
 
 
-# FORMS
-from modelcluster.fields import ParentalKey
-from wagtail.admin.edit_handlers import (
-    FieldPanel,
-    FieldRowPanel,
-    InlinePanel,
-    MultiFieldPanel,
-)
-from wagtail.core.fields import RichTextField
-from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
-from wagtail.contrib.forms.edit_handlers import FormSubmissionsPanel
-from wagtailcaptcha.models import WagtailCaptchaEmailForm
 
-
+#===============================
+# MARK: - FormPage
+#===============================
 class FormField(AbstractFormField):
     page = ParentalKey("FormPage", on_delete=models.CASCADE, related_name="form_fields")
 

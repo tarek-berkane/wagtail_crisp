@@ -59,7 +59,7 @@ INSTALLED_APPS = [
     "apps.project",
     "apps.subscribe",
     "apps.config",
-    "apps.monitor",
+    # "apps.monitor",
 ]
 
 MIDDLEWARE = [
@@ -71,7 +71,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
-    "apps.monitor.middleware.statics_middleware",
+    # "apps.monitor.middleware.statics_middleware",
 ]
 
 ROOT_URLCONF = "core.urls"

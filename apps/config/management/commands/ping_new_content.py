@@ -24,7 +24,7 @@ class Command(BaseCommand):
             if data["new_content"] == False:
                 return
 
-            # self.stdout.write(self.style.SUCCESS("Ping google"))
+            self.stdout.write(self.style.SUCCESS("Ping google"))
             ping_google(sitemap_url=reverse("sitemap"))
 
             data["new_content"] = False

@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     "django.contrib.humanize",
     # LIBRARIES
     "wagtailcaptcha",
-    "captcha",
+    "django_recaptcha",
+    # "captcha",
     # APPS
     "apps.home",
     "apps.post",
@@ -187,3 +188,5 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 PING_FILE = "ping_file.json"
+
+

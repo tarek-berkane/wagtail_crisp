@@ -26,9 +26,9 @@
 	</div>
 	{{page.content}}
 	{% include '_partail/share.html' %}
-	{% if not already_subscribe %}
+	{% comment %} {% if not already_subscribe %}
 		{% include 'subscribe/_partail/subscribe.html' %}
-	{% endif %}
+	{% endif %} {% endcomment %}
 	{% include '_partail/disqus.html' %}
 </article>
 {% endblock content %}

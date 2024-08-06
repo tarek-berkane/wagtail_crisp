@@ -60,6 +60,7 @@ DATABASES = {
         "OPTIONS": {
             "read_default_file": os.path.join(config_file, "my.cnf"),
             "sql_mode": "traditional",
+            "charset": "utf8mb4",
         },
     }
 }
@@ -80,6 +81,9 @@ DATABASES = {
 SILENCED_SYSTEM_CHECKS = [
     "captcha.recaptcha_test_key_error",
 ]
+
+RECAPTCHA_PUBLIC_KEY = env("RECAPTCHA_PUBLIC_KEY")
+RECAPTCHA_PRIVATE_KEY = env("RECAPTCHA_PRIVATE_KEY")
 
 try:
     from .local import *

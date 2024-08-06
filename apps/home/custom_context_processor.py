@@ -1,5 +1,9 @@
+from functools import lru_cache
+
 from apps.post.models import CategoryIndex
 from apps.home.models import Author, HomePage
+
+
 
 
 def get_navigation(request):
@@ -7,5 +11,4 @@ def get_navigation(request):
     navigation = []
     if home:
         navigation = home.get_children().live()
-
     return {"navigation": navigation}

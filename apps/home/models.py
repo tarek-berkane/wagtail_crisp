@@ -1,21 +1,13 @@
 from django.db import models
 from django.core.paginator import Paginator
-from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 
 from wagtail.models import Page
 from wagtail.fields import RichTextField
-from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.admin.panels import MultiFieldPanel, FieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from modelcluster.fields import ParentalKey
-from wagtail.admin.panels import (
-    FieldPanel,
-    FieldRowPanel,
-    InlinePanel,
-    MultiFieldPanel,
-)
-from wagtail.fields import RichTextField
+from wagtail.admin.panels import InlinePanel
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.contrib.forms.panels import FormSubmissionsPanel
 from wagtailcaptcha.models import WagtailCaptchaEmailForm
@@ -25,7 +17,6 @@ from apps.post.models import Post, PostCategory
 from apps.project.models import ProjectIndex
 
 from core.utils import cache_page_if_not_preview
-
 
 
 RICH_TEXT_FEATURES = [
@@ -39,9 +30,9 @@ RICH_TEXT_FEATURES = [
 ]
 
 
-#===============================
+# ===============================
 # MARK: - HomePage
-#===============================
+# ===============================
 # @method_decorator(cache_page_if_not_preview, name="serve")
 class HomePage(RoutablePageMixin, Page):
     max_count = 1
@@ -65,8 +56,7 @@ class HomePage(RoutablePageMixin, Page):
         return self.render(request, context_overrides=context)
 
     def get_queryset(self, post_type, tag):
-
-        post = Post.objects.all().live().order_by('-first_published_at')
+        post = Post.objects.all().live().order_by("-first_published_at")
 
         if post_type == "post":
             parent_type = PostCategory.objects.first()
@@ -102,9 +92,10 @@ class HomePage(RoutablePageMixin, Page):
 
         return parameter
 
-#===============================
+
+# ===============================
 # MARK: - Author
-#===============================
+# ===============================
 @method_decorator(cache_page_if_not_preview, name="serve")
 class Author(Page):
     max_count = 1
@@ -133,10 +124,9 @@ class Author(Page):
     ]
 
 
-
-#===============================
+# ===============================
 # MARK: - FormPage
-#===============================
+# ===============================
 class FormField(AbstractFormField):
     page = ParentalKey("FormPage", on_delete=models.CASCADE, related_name="form_fields")
 
@@ -144,6 +134,9 @@ class FormField(AbstractFormField):
 @method_decorator(cache_page_if_not_preview, name="serve")
 class FormPage(WagtailCaptchaEmailForm):
     max_count = 1
+    parent_page_types = [
+        "home.HomePage",
+    ]
 
     intro = RichTextField(blank=True)
     thank_you_text = RichTextField(blank=True)

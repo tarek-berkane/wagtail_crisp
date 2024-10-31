@@ -14,10 +14,10 @@ from search import views as search_views
 from core.views import robots
 
 urlpatterns = [
+    path("cms_admin_panel/", include(wagtailadmin_urls)),
     path("subscribe/", include("apps.subscribe.urls")),
     path("robots.txt/", robots),
     path("django-admin/", admin.site.urls),
-    path("cms_admin_panel/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
     path("sitemap.xml", sitemap, name="sitemap"),

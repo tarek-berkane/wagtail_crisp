@@ -1,11 +1,11 @@
 import os
-
 import environ
 
 from .base import *
 
-# Change it to your config file path
-config_file = "/home/coding43/config/crisp_blog"
+os.environ.setdefault("config_folder", "/home/config/")
+config_file = os.environ.get("config_folder")
+
 
 env = environ.Env()
 environ.Env.read_env(os.path.join(config_file, ".env"))
@@ -13,13 +13,11 @@ environ.Env.read_env(os.path.join(config_file, ".env"))
 
 DEBUG = False
 
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = env("secret_key")
 
 
-HOST = env("HOST")
-ALLOWED_HOSTS = [
-    HOST,
-]
+HOST = env("host")
+ALLOWED_HOSTS = [HOST]
 
 SECURE_SSL_REDIRECT = True
 
@@ -44,7 +42,7 @@ LOGGING = {
 }
 
 
-PUBLIC_DIR = env("PUBLIC_DIR")
+PUBLIC_DIR = env("public_dir")
 
 STATIC_ROOT = os.path.join(PUBLIC_DIR, "crisp_static")
 STATIC_URL = "/crisp_static/"
@@ -78,12 +76,11 @@ DATABASES = {
 # REDIS_PAGE_STATICS_SERVICE_NAME = "codingdz:pages_statistics"
 
 
-SILENCED_SYSTEM_CHECKS = [
-    "captcha.recaptcha_test_key_error",
-]
+SILENCED_SYSTEM_CHECKS = ["captcha.recaptcha_test_key_error"]
 
-RECAPTCHA_PUBLIC_KEY = env("RECAPTCHA_PUBLIC_KEY")
-RECAPTCHA_PRIVATE_KEY = env("RECAPTCHA_PRIVATE_KEY")
+RECAPTCHA_PUBLIC_KEY = env("recaptch_public_key")
+RECAPTCHA_PRIVATE_KEY = env("recaptcha_private_key")
+
 
 try:
     from .local import *

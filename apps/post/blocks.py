@@ -38,7 +38,10 @@ class CodeBlock(blocks.StructBlock):
         ("java", "Java"),
         ("html", "html"),
         ("dart", "Dart"),
+        ("shell", "Shell"),
+        ("bash", "Bash"),
         ("c", "C"),
+        ("postgresql", "PostgreSQL"),
     )
 
     code_type = blocks.ChoiceBlock(choices=CODE_TYPE, default="py")

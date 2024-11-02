@@ -17,9 +17,7 @@
         {% endblock %}
     </title>
 
-    <meta name="description" content="{% block meta_description %}
-                      {{ page.search_description }}
-        {% endblock meta_description %}" />
+    <meta name="description" content="{% block meta_description %}{{ page.search_description }}{% endblock meta_description %}" />
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,11 +25,11 @@
     {# Global stylesheets #}
     <link rel="stylesheet" type="text/css" href="{% static 'css/core.css' %}">
 
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,700italic,300,700' rel='stylesheet'
-        type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,700italic,300,700' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles/codingdz.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles/crisp.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles/tables.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles/guilatrova.css' %}">
@@ -65,21 +63,21 @@
     {% endblock %}
 
     {% if settings.config.GoogleAnalyticsSettings.is_enabled %}
-    {% with settings.config.GoogleAnalyticsSettings.account_id as account_id %}
-    {% if account_id %}
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{account_id}}"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
+        {% with settings.config.GoogleAnalyticsSettings.account_id as account_id %}
+            {% if account_id %}
+                <!-- Global site tag (gtag.js) - Google Analytics -->
+                <script async src="https://www.googletagmanager.com/gtag/js?id={{account_id}}"></script>
+                <script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag() { dataLayer.push(arguments); }
+                    gtag('js', new Date());
 
-        gtag('config', '{{account_id}}');
-    </script>
-    {% else %}
-    <!-- YOU DID FORGET TO SETUP ACCOUNT-ID FOR GOOGLE ANALYTICS -->
-    {% endif %}
-    {% endwith %}
+                    gtag('config', '{{account_id}}');
+                </script>
+            {% else %}
+                <!-- YOU DID FORGET TO SETUP ACCOUNT-ID FOR GOOGLE ANALYTICS -->
+            {% endif %}
+        {% endwith %}
     {% endif %}
 </body>
 

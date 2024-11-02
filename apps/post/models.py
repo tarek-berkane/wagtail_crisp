@@ -2,12 +2,12 @@ from django.db import models
 from django.core.paginator import Paginator
 from django.utils.decorators import method_decorator
 
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel
-from wagtail.models import Page
-from wagtail.fields import StreamField, RichTextField
+from wagtail.models import Page, Orderable
 from wagtail.blocks import RichTextBlock
+from wagtail.fields import StreamField, RichTextField
 from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
 
 from modelcluster.fields import ParentalKey
 from modelcluster.contrib.taggit import ClusterTaggableManager
@@ -31,12 +31,16 @@ RICH_TEXT_FEATURES = [
 ]
 
 
+# ===============================
+# MARK: PostPageTag
+# ===============================
 class PostPageTag(TaggedItemBase):
-    content_object = ParentalKey(
-        "Post", related_name="tagged_items", on_delete=models.CASCADE
-    )
+    content_object = ParentalKey("Post", related_name="tagged_items", on_delete=models.CASCADE)
 
 
+# ===============================
+# MARK: CategoryIndex
+# ===============================
 @method_decorator(cache_page_if_not_preview, name="serve")
 class CategoryIndex(RoutablePageMixin, Page):
     max_count = 1
@@ -62,6 +66,9 @@ class CategoryIndex(RoutablePageMixin, Page):
         )
 
 
+# ===============================
+# MARK: PostCategory
+# ===============================
 @method_decorator(cache_page_if_not_preview, name="serve")
 class PostCategory(RoutablePageMixin, Page):
     parent_page_types = ["post.CategoryIndex"]
@@ -92,9 +99,13 @@ class PostCategory(RoutablePageMixin, Page):
         )
 
 
+# ===============================
+# MARK: Post
+# ===============================
 @method_decorator(cache_page_if_not_preview, name="serve")
 class Post(Page):
     parent_page_types = ["post.PostCategory", "project.ProjectIndex"]
+
     tags = ClusterTaggableManager(through=PostPageTag, blank=True)
 
     include_comments = models.BooleanField(default=True)
@@ -112,15 +123,14 @@ class Post(Page):
     )
 
     content_panels = Page.content_panels + [
+        InlinePanel("post_cover",label="Post Cover",max_num=1),
         FieldPanel("tags"),
         FieldPanel("content"),
     ]
 
     settings_panels = Page.settings_panels + [
         MultiFieldPanel(
-            [
-                FieldPanel("include_comments"),
-            ],
+            [FieldPanel("include_comments")],
             heading="comments",
         )
     ]
@@ -130,3 +140,17 @@ class Post(Page):
         context["form"] = SubscribeForm()
         context[ALREADY_SUBSCRIBE] = already_subscribed(request)
         return context
+
+
+# ===============================
+# MARK: PostCover
+# ===============================
+class PostCoverGalleryImage(Orderable):
+    page = ParentalKey(Post, on_delete=models.CASCADE, related_name="post_cover")
+    image = models.ForeignKey("wagtailimages.Image", on_delete=models.CASCADE, related_name="+")
+    caption = models.CharField(blank=True, max_length=250)
+
+    panels = [
+        FieldPanel("image"),
+        FieldPanel("caption"),
+    ]

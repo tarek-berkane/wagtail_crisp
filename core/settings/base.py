@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     # LIBRARIES
     "wagtailcaptcha",
     "django_recaptcha",
+    "django_tasks",
+    "django_tasks.backends.database",
     # "captcha",
     # APPS
     "apps.home",
@@ -189,3 +191,6 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 PING_FILE = "ping_file.json"
+
+
+TASKS = {"default": {"BACKEND": "django_tasks.backends.database.DatabaseBackend"}}
